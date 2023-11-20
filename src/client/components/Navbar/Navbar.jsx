@@ -14,7 +14,7 @@ import { mainNavbarItems } from './consts/mainNavbarItems';
 import { navbarStyles } from './styles';
 
 const Navbar = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <Drawer sx={navbarStyles.drawer} variant="permanent" anchor="left">
