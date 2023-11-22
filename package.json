@@ -1,19 +1,25 @@
 {
-  "name": "kubik-template",
+  "name": "kubik",
   "private": true,
   "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
-    "dev": "vite",
+    "start": "NODE_ENV='development' electron .",
+    "dev": "concurrently \"NODE_ENV='development' nodemon server/server.js\" \"NODE_ENV='development' vite dev\" --host 0.0.0.0",
     "server": "nodemon src/server/server.js",
-    "build": "vite build",
+    "build": "vite build && npm run pack",
+    "postinstall": "electron-builder install-app-deps",
+    "pack": "electron-builder -mwl",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@esbuild/darwin-arm64": "^0.19.7",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "mongoose": "^8.0.1",
@@ -22,9 +28,14 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "@babel/preset-react": "^7.23.3",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@vitejs/plugin-react": "^4.2.0",
+    "electron": "^27.1.0",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.54.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.0.0",
