@@ -19,6 +19,7 @@
     "@esbuild/darwin-arm64": "^0.19.7",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
+    "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

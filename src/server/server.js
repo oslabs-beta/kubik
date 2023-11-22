@@ -1,38 +1,38 @@
 const express = require('express');
 const path = require('path');
-const prometheus = require('prom-client');
-const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+require('dotenv').config();
 // import cookieParser from 'cookie-parser';
+// const prometheus = require('prom-client');
 
-dotenv.config();
-
-const app = express();
+connectDB();
 const PORT = process.env.EXPRESS_PORT || 3020;
+const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(cookieParser);
 
 app.use(express.static(path.resolve(__dirname, '../assets')));
 
-// enable a collection of default metrics
-prometheus.collectDefaultMetrics();
+// routes
+app.use('/auth', require('./endpoints/auth'));
 
-const httpRequestCount = new prometheus.Counter({
-  name: 'webapp_http_requests_total',
-  help: 'Total number of HTTP requests',
-});
+// global error handler
+app.use((err, req, res, next) => {
+  // debugging
+  console.error(err.stack);
 
-app.get('/', (req, res) => {
-  // Increment the custom metric on each request
-  httpRequestCount.inc();
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
 
-  res.send('Hello World!');
-});
-
-app.get('/metrics', (req, res) => {
-  // Expose metrics for Prometheus to scrape
-  res.set('Content-Type', prometheus.register.contentType);
-  res.end(prometheus.register.metrics());
+  res.status(statusCode).json({
+    error: {
+      message: message,
+      status: statusCode,
+      timestamp: new Date().toISOString(),
+    },
+  });
 });
 
 app.listen(PORT, () => {
