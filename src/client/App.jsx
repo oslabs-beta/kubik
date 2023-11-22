@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
+import GrafanaDashboard from './GrafanaDashboard.jsx';
 import { Outlet } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Header from './components/Header/Header.jsx';
@@ -22,6 +23,7 @@ const App = () => {
       <Navbar />
       <Header title={title} />
       <Outlet />
+      <GrafanaDashboard dashboardUid="" />
     </Grid>
   );
 };
