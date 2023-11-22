@@ -1,8 +1,8 @@
-import express from 'express';
+const express = require('express');
+const router = express.Router();
 // import clusterRouter from './clusterRouter';
 const grafanaService = require('..services/grafanaService');
 const dashboardController = require('./dashboardController');
-const router = express.Router();
 
 // // cluster router
 // router.use('/cluster', clusterRouter);
@@ -30,4 +30,4 @@ router.get('/grafana/dashboards', async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

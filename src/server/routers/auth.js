@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userModel');
-const { hashPassword, verifyPassword } = require('../middlewares/bcrypt');
+const bcryptController = require('../middlewares/bcrypt');
 
 router
   // Signup route
-  .post('/signup', hashPassword, async (req, res, next) => {
+  .post('/signup', bcryptController.hashPassword, async (req, res, next) => {
     try {
       const { firstName, lastName, username, password } = req.body;
 
@@ -47,7 +47,7 @@ router
         next(error);
       }
     },
-    verifyPassword,
+    bcryptController.verifyPassword,
     (req, res) => {
       res.send('Success');
     }
