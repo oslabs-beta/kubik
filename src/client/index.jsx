@@ -7,8 +7,8 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
 import { dashboardTheme } from '../dashboardTheme.js';
-import Main from './pages/MainPage/MainPage.jsx';
-import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import Main from './pages/MainPage.jsx';
+import Dashboard from './pages/Dashboard.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={dashboardTheme}>
