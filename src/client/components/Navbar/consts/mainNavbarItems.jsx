@@ -9,8 +9,8 @@ export const mainNavbarItems = [
   {
     id: 0,
     icon: <PeopleIcon />,
-    label: 'Cluster',
-    route: 'cluster',
+    label: 'Home',
+    route: 'home',
   },
   {
     id: 1,
@@ -24,22 +24,22 @@ export const mainNavbarItems = [
     label: 'Cluster Map',
     route: 'cluster-map',
   },
-  {
-    id: 3,
-    icon: <PublicIcon />,
-    label: 'Queries',
-    route: 'queries',
-  },
-  {
-    id: 4,
-    icon: <SettingsEthernetIcon />,
-    label: 'Alerts',
-    route: 'alerts',
-  },
-  {
-    id: 5,
-    icon: <SettingsInputComponentIcon />,
-    label: 'OpenFaaS',
-    route: 'OpenFaaS Cost',
-  },
+  // {
+  //   id: 3,
+  //   icon: <PublicIcon />,
+  //   label: 'Queries',
+  //   route: 'queries',
+  // },
+  // {
+  //   id: 4,
+  //   icon: <SettingsEthernetIcon />,
+  //   label: 'Alerts',
+  //   route: 'alerts',
+  // },
+  // {
+  //   id: 5,
+  //   icon: <SettingsInputComponentIcon />,
+  //   label: 'OpenFaaS',
+  //   route: 'OpenFaaS Cost',
+  // },
 ];
