@@ -5,7 +5,6 @@ const connectDB = require('./config/db');
 // const cookieParser = require('cookie-parser');
 require('dotenv').config();
 const router = require('./routers/router');
-// const prometheus = require('prom-client');
 
 const PORT = process.env.EXPRESS_PORT || 3020;
 const app = express();
@@ -16,8 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors());
 // app.use(cookieParser());
 
+// needs directory check
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+// needs edit
 // get request to root endpt, send index.html file as the response
 app.get('/', (req, res) => {
   console.log('Backend and frontend linked');
@@ -25,8 +26,7 @@ app.get('/', (req, res) => {
 });
 
 // routes
-app.use('/auth', require('./routers/auth'));
-app.use('/api/grafana', router);
+app.use('/api', router);
 
 // local error handler
 app.use((req, res) => res.sendStatus(404));
@@ -39,7 +39,7 @@ app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
 
-  res.status(statusCode).json({
+  return res.status(statusCode).json({
     error: {
       message: message,
       status: statusCode,
@@ -51,5 +51,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Backend server listening at http://localhost:${PORT}`);
 });
-
-module.exports = app;

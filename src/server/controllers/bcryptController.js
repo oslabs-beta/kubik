@@ -6,25 +6,29 @@ const bcryptController = {
     try {
       const BCRYPT_SALT_ROUNDS = 10;
       const salt = await bcrypt.genSalt(BCRYPT_SALT_ROUNDS);
+
       req.body.password = await bcrypt.hash(req.body.password, salt);
-      next();
+      return next();
     } catch (error) {
-      next(error);
+      return next(error);
     }
   },
 
   // Middleware for verifying password
   verifyPassword: async (req, res, next) => {
     try {
-      const { user, password } = req;
+      const user = res.locals.user;
+      const { password } = req.body;
       const validPassword = await bcrypt.compare(password, user.password);
+
       if (!validPassword) {
-        // Return a generic error message
         return res.status(401).send('Invalid username or password');
       }
-      next();
+
+      res.locals.user = user.username;
+      return next();
     } catch (error) {
-      next(error);
+      return next(error);
     }
   },
 };
