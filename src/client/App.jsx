@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import MainPage from './pages/MainPage/MainPage';
+import MainPage from './pages/MainPage';
 
 const App = () => {
   const navigate = useNavigate();

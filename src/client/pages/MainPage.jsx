@@ -2,11 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
 // import { Outlet } from 'react-router-dom';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../components/Navbar/Navbar';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
-import HomePage from '../HomePage/HomePage';
-import Panel from '../../components/Panel/Panel';
+import HomePage from './HomePage';
+import Panel from '../components/Panel/Panel';
 
 const MainPage = ({ userId, setUserId }) => {
   // Declaring default values for dashboard
