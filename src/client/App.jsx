@@ -6,25 +6,35 @@ import { Outlet } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import Header from './components/Header/Header.jsx';
 import { useLocation } from 'react-router-dom';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+import MainPage from './pages/MainPage/MainPage';
 
 const App = () => {
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState('');
+
   // state for titles
-  const [title, setTitle] = useState(null);
-  const location = useLocation();
+  // const [title, setTitle] = useState(null);
+  // const location = useLocation();
 
   // useEffect to set title of page
-  useEffect(() => {
-    const parsedTitle = location.pathname.replace(/\W/g, ' ');
-    setTitle(parsedTitle);
-  }, [location]);
+  // useEffect(() => {
+  //   const parsedTitle = location.pathname.replace(/\W/g, ' ');
+  //   setTitle(parsedTitle);
+  // }, [location]);
 
   return (
-    <Grid container>
-      <Navbar />
-      <Header title={title} />
-      <Outlet />
-      <GrafanaDashboard dashboardUid="" />
-    </Grid>
+    <DndProvider backend={HTML5Backend}>
+      <Routes>
+        <Route
+          path="/"
+          element={<MainPage userId={userId} setUserId={setUserId} />}
+        />
+        {/* <Route path="/mainPage"></Route> */}
+      </Routes>
+    </DndProvider>
   );
 };
 
