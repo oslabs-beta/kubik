@@ -1,33 +1,15 @@
 const express = require('express');
 const router = express.Router();
-// import clusterRouter from './clusterRouter';
-const grafanaService = require('..services/grafanaService');
-const dashboardController = require('./dashboardController');
+const authRouter = require('./authRouter');
+const grafanaRouter = require('./grafanaRouter');
 
-// // cluster router
+// User auth router
+router.use('/auth', authRouter);
+
+// cluster router
 // router.use('/cluster', clusterRouter);
 
-// dashboard router
-router.get('/grafana/dashboard/:uid', async (req, res) => {
-  const dashboardUid = req.params.uid;
-
-  try {
-    const dashboard = await grafanaService.fetchGrafanaDashboard(dashboardUid);
-    res.json(dashboard);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch Grafana dashboard' });
-  }
-});
-
-router.get('/grafana/dashboards', async (req, res) => {
-  try {
-    const dashboardUIds = await dashboardController.getDashboards();
-    res.json(dashboardUIds);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to fetch Grafana dashboards' });
-  }
-});
+// grafana dashboard router
+router.use('/grafana', grafanaRouter);
 
 module.exports = router;
