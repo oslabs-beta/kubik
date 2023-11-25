@@ -24,12 +24,12 @@ export const mainNavbarItems = [
     label: 'Cluster Map',
     route: 'cluster-map',
   },
-  // {
-  //   id: 3,
-  //   icon: <PublicIcon />,
-  //   label: 'Queries',
-  //   route: 'queries',
-  // },
+  {
+    id: 3,
+    icon: <PublicIcon />,
+    label: 'Alerts',
+    route: 'alerts',
+  },
   // {
   //   id: 4,
   //   icon: <SettingsEthernetIcon />,

@@ -12,7 +12,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 
 const App = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [userId, setUserId] = useState('');
   const grafanaDashboardUrl =
     'http://localhost:3000/d/rYdddlPWk/node-exporter-full?orgId=1';
