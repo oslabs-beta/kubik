@@ -63,7 +63,7 @@ app.use('/api', router);
 app.use((req, res) => res.sendStatus(404));
 
 // global error handler
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   // debugging
   console.error(err.stack);
 
