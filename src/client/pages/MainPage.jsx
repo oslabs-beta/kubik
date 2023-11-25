@@ -6,8 +6,9 @@ import Navbar from '../components/Navbar/Navbar';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import HomePage from './HomePage';
-import Panel from '../components/Panel/Panel';
+// import Panel from '../components/Panel/Panel';
 
+// This page will determine what to render: login or home page
 const MainPage = ({ userId, setUserId }) => {
   // Declaring default values for dashboard
   const defaultDashboard = {
@@ -40,14 +41,46 @@ const MainPage = ({ userId, setUserId }) => {
   // Declare states
   const [cluster, setCluster] = useState([]);
   const [currCluster, setCurrCluster] = useState(defaultCluster);
-  const [clusterFetcher, setClusterFetched] = useState(false);
+  // const [clusterFetcher, setClusterFetched] = useState(false);
   const [toggleDashboard, setToggleDashboard] = useState('home');
   const [showClusterEditor, setShowClusterEditor] = useState(false);
 
   const navigate = useNavigate();
 
-  // declare mainComponent, which will render based off what user clicks
-  let mainComponent = <HomePage />;
+  // declare mainComponent that will render 'HomePage' and clusterEditor
+  let mainComponent = (
+    <HomePage
+      userId={userId}
+      cluster={cluster}
+      setCluster={setCluster}
+      showClusterEditor={showClusterEditor}
+    />
+  );
+
+  // Conditionals for what to render: cluster or dashboard
+  if (toggleDashboard === 'home') {
+    mainComponent = (
+      <HomePage
+        key={uuidv4()}
+        userId={userId}
+        cluster={cluster}
+        setCluster={setCluster}
+        showClusterEditor={showClusterEditor}
+        setShowClusterEditor={setShowClusterEditor}
+      />
+    );
+  } else {
+    mainComponent = (
+      <Dashboard
+        key={uuidv4()}
+        userId={userId}
+        cluster={cluster}
+        currCluster={currCluster}
+        toggleDashboard={toggleDashboard}
+        setToggleDashboard={setToggleDashboard}
+      />
+    );
+  }
 
   return (
     <Grid container>
