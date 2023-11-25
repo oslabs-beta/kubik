@@ -44,6 +44,8 @@ app.use(express.urlencoded({ extended: true }));
 // check session
 app.get('/', require('./controllers/sessionController').checkSession);
 
+//
+
 // needs directory check
 app.use(express.static(path.resolve(__dirname, '../client')));
 
@@ -61,7 +63,7 @@ app.use('/api', router);
 app.use((req, res) => res.sendStatus(404));
 
 // global error handler
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   // debugging
   console.error(err.stack);
 
