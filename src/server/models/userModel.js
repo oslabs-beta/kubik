@@ -20,9 +20,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  clusters: {
-    type: Array,
-  },
+  clusters: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Cluster',
+    },
+  ],
 });
 
 const User = mongoose.model('User', userSchema);

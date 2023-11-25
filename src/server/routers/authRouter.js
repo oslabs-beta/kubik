@@ -2,26 +2,32 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const bcryptController = require('../controllers/bcryptController');
+const sessionController = require('../controllers/sessionController');
 
 router
-  // Signup route
+  // Signup user
   .post(
     '/signup',
     bcryptController.hashPassword,
     authController.signup,
+    sessionController.addSession,
     (req, res) => {
-      return res.status(200).json(res.locals.user);
+      return res.status(200).json(res.locals.user.username);
     }
   )
 
-  // Login route
+  // Login user
   .post(
     '/login',
     authController.login,
     bcryptController.verifyPassword,
+    sessionController.addSession,
     (req, res) => {
-      return res.status(200).json(res.locals.user);
+      return res.status(200).json(res.locals.user.username);
     }
-  );
+  )
+
+  // Logout user
+  .get('/logout', authController.logout);
 
 module.exports = router;

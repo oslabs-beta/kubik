@@ -45,10 +45,26 @@ const authController = {
         password,
       });
 
-      res.locals.user = user.username;
+      res.locals.user = user;
       return next();
     } catch (error) {
       return next(error);
+    }
+  },
+
+  // Middleware for user logout
+  logout: (req, res) => {
+    if (req.session) {
+      req.session.destroy((err) => {
+        if (err) {
+          res.status(500).send('Error logging out');
+        } else {
+          res.clearCookie('kubik_sid');
+          res.send('Logged out successfully');
+        }
+      });
+    } else {
+      res.status(200).send('No active session to log out from');
     }
   },
 };

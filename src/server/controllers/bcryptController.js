@@ -25,7 +25,6 @@ const bcryptController = {
         return res.status(401).send('Invalid username or password');
       }
 
-      res.locals.user = user.username;
       return next();
     } catch (error) {
       return next(error);
