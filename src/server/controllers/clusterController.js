@@ -2,7 +2,7 @@ const Cluster = require('../models/clusterModel');
 const User = require('../models/userModel');
 
 const clusterController = {
-  // Middleware for retrieving user clusters
+  // Middleware for getting a cluster
   getCluster: async (req, res, next) => {
     try {
       if (!req.session.userId) {
@@ -10,9 +10,22 @@ const clusterController = {
       }
 
       const userId = req.session.userId;
-      const user = await User.findById(userId).populate('clusters').exec();
+      const clusterId = req.params.clusterId;
 
+      const queryOptions = clusterId
+        ? {
+            path: 'clusters',
+            match: { _id: clusterId },
+          }
+        : 'clusters';
+
+      const user = await User.findById(userId).populate(queryOptions).exec();
       res.locals.clusters = user.clusters;
+
+      if (clusterId) {
+        res.locals.clusterUrl = user.clusters[0]?.clusterUrl;
+      }
+
       return next();
     } catch (error) {
       return next(error);
@@ -35,7 +48,7 @@ const clusterController = {
         { new: true, useFindAndModify: false }
       );
 
-      res.locals.newCluster = newCluster;
+      res.locals.clusterUrl = req.body.clusterUrl;
       return next();
     } catch (error) {
       return next(error);

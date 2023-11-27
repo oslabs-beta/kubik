@@ -7,10 +7,10 @@ const grafanaRouter = require('./grafanaRouter');
 // User auth router
 router.use('/auth', authRouter);
 
-// cluster router
+// Cluster router
 router.use('/cluster', clusterRouter);
 
-// grafana dashboard router
+// Grafana dashboard router
 router.use('/dashboard', grafanaRouter);
 
 module.exports = router;
