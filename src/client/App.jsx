@@ -10,6 +10,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import MainPage from './pages/MainPage';
+import ClusterMap from './pages/ClusterMap.jsx';
 
 const App = () => {
   // const navigate = useNavigate();
@@ -41,6 +42,8 @@ const App = () => {
             <GrafanaDashboard grafanaDashboardUrl={grafanaDashboardUrl} />
           }
         />
+        <Route path="/cluster-map" element={<ClusterMap />} />
+        {/* Route path /cluster-map */}
       </Routes>
     </DndProvider>
   );
