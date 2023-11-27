@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -36,14 +37,38 @@ function Copyright(props) {
 // const defaultTheme = createTheme();
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  
+    try {
+      const response = await fetch('http://localhost:3020/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: data.get('email'), // assuming email is used as username
+          password: data.get('password'),
+        }),
+        credentials: 'include', // necessary for cookies to be sent and received
+      });
+  
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        console.log('Login Successful:', responseData);
+        // handle successful login (redirect or change state?)
+      } else {
+        console.error('Login Failed:', responseData);
+        // handle login errors
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      // handle network error
+    }
   };
+  
 
   return (
     <ThemeProvider theme={defaultTheme}>
