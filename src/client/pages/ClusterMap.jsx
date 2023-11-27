@@ -1,10 +1,4 @@
-// const ClusterMap = () => {
-//   //useEffect for backend call
-//   return <div>This is ClusterMap page 🫡🫡🫡</div>;
-// };
-
-// export default ClusterMap;
-
+// ------------------------------------------------------------
 import React, { useEffect, useState } from 'react';
 
 const ClusterMap = () => {
@@ -17,7 +11,9 @@ const ClusterMap = () => {
       const clusterPort = '62392';
 
       const apiEndpoint = `http://${clusterIP}:${clusterPort}/api/v1/pods`;
-      const response = await fetch(apiEndpoint);
+      const response = await fetch(apiEndpoint, {
+        method: 'GET',
+      });
       const data = await response.json();
       setPodData(data.items);
     } catch (error) {

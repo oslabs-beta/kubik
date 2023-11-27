@@ -1,80 +1,35 @@
-// const createErrorObject = (err) => {
-//   return {
-//     log: 'Error in dashboardController',
-//     message: { err: `An error occurred ${err}` },
-//   };
-// };
+const dashboards = require('../dashboard/dashboardIndex');
 
-// const dashboardController = {
-//   // get dashboard uid from grafana
-//   getDashboards: async (url) => {
-//     // credentials for grafana api access
-//     const username = 'admin';
-//     const password = 'prom-operator';
+const dashboardController = {
+  // Middleware for creating user dashboards
+  createDashboard: async (req, res, next) => {
+    const clusterUrl = res.locals.clusterUrl;
+    const username = 'admin';
+    const password = 'admin';
 
-//     // encode credentials
-//     const credentials = `${username}:${password}`;
-//     const buffer = Buffer.from(credentials, 'utf-8');
-//     const encodedCredentials = buffer.toString('base64');
+    const encodedCredentials = Buffer.from(
+      `${username}:${password}`,
+      `utf-8`
+    ).toString('base64');
 
-//     // dashboard names to search for in grafana
-//     const dashboards = {
-//       apiServerUId: 'apiServer',
-//       kubeStateMetricUId: 'kubeStateMetric',
-//       kubePrometheusUId: 'kubePrometheus',
-//       nodeExporterUId: 'nodeExporter',
-//     };
+    try {
+      for (const dashboard of Object.values(dashboards)) {
+        await fetch(`${clusterUrl}/api/dashboards/db`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Basic ${encodedCredentials}`,
+          },
+          body: JSON.stringify({ dashboard: dashboard, overwrite: false }),
+        });
+      }
 
-//     // call the fetchGrafana function to get dashboard uids
-//     const dashboardUIds = await fetchGrafana();
-//     console.log(dashboardUIds);
-//     return dashboardUIds;
+      return next();
+    } catch (error) {
+      return next(error);
+    }
+  },
+};
 
-//     // fetch dashboard UIds from grafana
-//     async function fetchGrafana() {
-//       const dashboardUIds = {};
-
-//       // iterate thru dashboard names
-//       for (const k in dashboards) {
-//         try {
-//           const dashboard = await grafanaService.fetchGrafanaDashboard(
-//             dashboards[k]
-//           );
-//           dashboardUIds[k] = dashboard.id;
-//         } catch (err) {
-//           return createErrorObject(err);
-//         }
-//       }
-//       // return dashboard uids object
-//       return dashboardUIds;
-//     }
-//   },
-// };
-
-// module.exports = dashboardController;
-
-// // const fetch = require('node-fetch');
-// // const config = require('../config');
-
-// // const fetchGrafanaDashboard = async (dashboardUid) => {
-// //   const { url, username, password } = config.grafana;
-// //   const credentials = `${username}:${password}`;
-// //   const buffer = Buffer.from(credentials, 'utf-8');
-// //   const encodedCredentials = buffer.toString('base64');
-
-// //   const response = await fetch(`${url}/api/dashboards/uid/${dashboardUid}`, {
-// //     method: 'GET',
-// //     headers: {
-// //       Accept: 'application/json',
-// //       'Content-Type': 'application/json',
-// //       Authorization: `Basic ${encodedCredentials}`,
-// //     },
-// //   });
-
-// //   const data = await response.json();
-// //   return data.dashboard;
-// // };
-
-// // module.exports = {
-// //   fetchGrafanaDashboard,
-// // };
+module.exports = dashboardController;

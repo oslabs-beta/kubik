@@ -13,7 +13,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: '*',
+    origin: 'http://localhost:4444',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   })
