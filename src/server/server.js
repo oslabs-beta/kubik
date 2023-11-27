@@ -44,8 +44,6 @@ app.use(express.urlencoded({ extended: true }));
 // check session
 app.get('/', require('./controllers/sessionController').checkSession);
 
-//
-
 // needs directory check
 app.use(express.static(path.resolve(__dirname, '../client')));
 
