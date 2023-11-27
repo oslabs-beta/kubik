@@ -10,7 +10,7 @@ import CommonButton from '../components/common/CommonButton/CommonButton';
 import Typography from '@mui/material/Typography';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
-// import ClusterEd
+import GridWrapper from '../components/common/GridWrapper/GridWrapper';
 
 // Add Cluster functionality on this page
 const HomePage = () => {
@@ -82,19 +82,9 @@ const HomePage = () => {
   );
 
   return (
-    <Grid
-      item
-      xs={8}
-      sx={{
-        marginLeft: '320px',
-        // backgroundColor: '#eaeff1',
-        padding: '48px 32px',
-        minHeight: 'calc(100vh - 166px',
-        position: 'relative',
-      }}
-    >
+    <GridWrapper>
       <CommonCard header={getSearchBar()} content={getCluster()} />
-    </Grid>
+    </GridWrapper>
   );
 };
 
