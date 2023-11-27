@@ -1,5 +1,6 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
+import Panel from '../components/Panel/Panel';
 
 const Dashboard = () => {
   // Set states for dashboard to display
