@@ -11,9 +11,16 @@ import Typography from '@mui/material/Typography';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import IconButton from '@mui/material/IconButton';
 import GridWrapper from '../components/common/GridWrapper/GridWrapper';
+// import CommonModal from '../components/common/CommonModal/CommonModal';
+import NewClusterModal from '../components/ClusterEditor/NewClusterModal';
+import { v4 as uuidv4 } from 'uuid';
 
 // Add Cluster functionality on this page
 const HomePage = () => {
+  // State for showing Cluster modal
+  const [open, setOpen] = useState(false);
+  const [clusters, setClusters] = useState([]);
+
   // Function to handle search bar functionality
   const getSearchBar = () => {
     // Function to handle user inputs
@@ -21,8 +28,10 @@ const HomePage = () => {
       console.log(value);
     };
 
+    // Function to open NewClusterModal
     const addCluster = () => {
-      console.log('click');
+      setOpen(true);
+      // console.log('click');
     };
 
     // Styles obj
@@ -67,23 +76,46 @@ const HomePage = () => {
     );
   };
 
+  // Function to addNewCluster
+  const addNewCluster = (data) => {
+    clusters.push({ ...data });
+    setOpen(false);
+  };
+
   // Function to get available Clusters
   const getCluster = () => (
-    <Typography
-      align="center"
-      sx={{
-        margin: '40px 16px',
-        color: 'rgba(0, 0, 0, 0.6',
-        fontSize: '1.3rem',
-      }}
-    >
-      No clusters added yet
-    </Typography>
+    <>
+      {clusters.length ? (
+        clusters.map((cluster, index) => (
+          <Box key={uuidv4()} index={index} sx={{ marginBottom: '20px' }}>
+            <Typography>Cluster Name: {cluster.clusterName}</Typography>
+            <Typography>Cluster URL: {cluster.clusterUrl}</Typography>
+            <Typography>Cluster Port: {cluster.clusterPort}</Typography>
+          </Box>
+        ))
+      ) : (
+        <Typography
+          align="center"
+          sx={{
+            margin: '40px 16px',
+            color: 'rgba(0, 0, 0, 0.6',
+            fontSize: '1.3rem',
+          }}
+        >
+          No clusters added yet
+        </Typography>
+      )}
+    </>
   );
 
   return (
     <GridWrapper>
       <CommonCard header={getSearchBar()} content={getCluster()} />
+      <NewClusterModal
+        open={open}
+        onClose={() => setOpen(false)}
+        addNewCluster={addNewCluster}
+      />
     </GridWrapper>
   );
 };

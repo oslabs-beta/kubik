@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const authRouter = require('./authRouter');
 const clusterRouter = require('./clusterRouter');
-const grafanaRouter = require('./grafanaRouter');
+// const grafanaRouter = require('./grafanaRouter');
+const viewRouter = require('./viewRouter');
 
 // User auth router
 router.use('/auth', authRouter);
@@ -10,7 +11,10 @@ router.use('/auth', authRouter);
 // Cluster router
 router.use('/cluster', clusterRouter);
 
+// View router for cluster map visualization
+router.use('/view', viewRouter);
+
 // Grafana dashboard router
-router.use('/dashboard', grafanaRouter);
+// router.use('/dashboard', grafanaRouter);
 
 module.exports = router;

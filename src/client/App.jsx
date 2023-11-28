@@ -8,7 +8,7 @@ import Header from './components/Header/Header.jsx';
 import { useLocation } from 'react-router-dom';
 // import { DndProvider } from 'react-dnd';
 // import { HTML5Backend } from 'react-dnd-html5-backend';
-// import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 // import MainPage from './pages/MainPage';
 
 const App = () => {
@@ -31,6 +31,14 @@ const App = () => {
     <Grid container>
       <Navbar />
       <Header title={title} />
+      <Routes>
+        <Route
+          path="/dashboard"
+          element={
+            <GrafanaDashboard grafanaDashboardUrl={grafanaDashboardUrl} />
+          }
+        />
+      </Routes>
       <Outlet />
     </Grid>
   );
@@ -38,8 +46,8 @@ const App = () => {
 
 export default App;
 
-{
-  /* <DndProvider backend={HTML5Backend}>
+// {
+/* <DndProvider backend={HTML5Backend}>
 <Routes>
   <Route
     path="/"
@@ -54,4 +62,4 @@ export default App;
   />
 </Routes>
 </DndProvider> */
-}
+// }

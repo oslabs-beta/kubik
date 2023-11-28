@@ -8,7 +8,6 @@ import { dashboardTheme } from '../dashboardTheme.js';
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import ClusterMap from './pages/ClusterMap.jsx';
 import Alerts from './pages/Alerts.jsx';
 import Main from './pages/MainPage.jsx';
 import Login from './pages/Login.jsx'
@@ -20,7 +19,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />}>
           <Route path="home" element={<HomePage />} />
           <Route path="dashboard" element={<Dashboard />} />
-          <Route path="cluster-map" element={<ClusterMap />} />
           <Route path="alerts" element={<Alerts />} />
           <Route path="login" element={<Login />} />
         </Route>
