@@ -17,39 +17,35 @@ const viewController = {
       const services = await k8sApi.listServiceForAllNamespaces();
       const deployments = await appsV1Api.listDeploymentForAllNamespaces();
 
-      // console.log('🚀🚀🚀deployments🚀🚀🚀', deployments);
+      const getsvcPodRelation = () => {
+        //
+      };
 
       //////////////////////////// EDIT THIS PLEASE //////////////
-      // const LOGGER = {
-      //   nodes: nodes.body.items.map((node) => node.metadata.name),
-      //   pods: pods.body.items.map((pod) => ({
-      //     name: pod.metadata.name,
-      //     nodeName: pod.spec.nodeName,
-      //   })),
-      //   services: services.body.items.map((service) => service.metadata.name),
-      //   deployments: deployments.body.items.map(
-      //     (deployment) => deployment.metadata.name
-      //   ),
-      // };
-
-      // services.body.items.forEach((service, idx) => {
-      //   console.log(idx, service.spec.selector);
-      // });
+      const LOGGER = {
+        nodes: nodes.body.items.map((node) => node.metadata.name),
+        pods: pods.body.items.map((pod) => ({
+          name: pod.metadata.name,
+          nodeName: pod.spec.nodeName,
+        })),
+        services: {
+          name: services.body.items.map((service) => service.metadata.name),
+          svcPodRelation: getsvcPodRelation(),
+        },
+        deployments: deployments.body.items.map(
+          (deployment) => deployment.metadata.name
+        ),
+      };
 
       pods.body.items.forEach((pod, idx) => {
         console.log(idx, pod.metadata.labels);
       });
 
-      // const LOGGER = services.body.items[1].spec.selector;
-
-      // console.log('🚀🚀🚀LOGGER🚀🚀🚀', LOGGER);
-
-      //////////////////////////// EDIT THIS PLEASE //////////////
-
       // change THIS
-      // res.locals.YVONNE = LOGGER;
-    } catch (err) {
-      console.error(err);
+      res.locals.YVONNE = LOGGER;
+      return next();
+    } catch (error) {
+      return next(error);
     }
   },
 };
