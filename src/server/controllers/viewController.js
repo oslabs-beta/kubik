@@ -18,10 +18,35 @@ const viewController = {
       const deployments = await appsV1Api.listDeploymentForAllNamespaces();
 
       const getsvcPodRelation = () => {
-        //
+        // services.spec.selector
+        // 1 {
+        //   'app.kubernetes.io/instance': 'prometheus',
+        //   'app.kubernetes.io/name': 'alertmanager'
+        // }
+        // 2 {
+        //   'app.kubernetes.io/instance': 'prometheus',
+        //   'app.kubernetes.io/name': 'alertmanager'
+        // }
+        // MATCH ABOVE WITH pods.metadata.labels
       };
 
-      //////////////////////////// EDIT THIS PLEASE //////////////
+      const mapSvcPod = (podLabels, svcSelector) => {
+        for (const key of Object.keys(svcSelector)) {
+          if (!podLabels[key] || podLabels[key] !== svcSelector[key])
+            return false;
+        }
+
+        return true;
+      };
+
+      // gpt
+      // const mapSvcPod = (podLabels, svcSelector) => {
+      //   return Object.keys(svcSelector).every(
+      //     (key) => podLabels[key] === svcSelector[key]
+      //   );
+      // };
+
+      ////////////// fetch k8s data //////////////
       const LOGGER = {
         nodes: nodes.body.items.map((node) => node.metadata.name),
         pods: pods.body.items.map((pod) => ({
@@ -41,8 +66,7 @@ const viewController = {
         console.log(idx, pod.metadata.labels);
       });
 
-      // change THIS
-      res.locals.YVONNE = LOGGER;
+      res.locals.data = LOGGER;
       return next();
     } catch (error) {
       return next(error);
