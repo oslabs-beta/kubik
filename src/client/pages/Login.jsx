@@ -1,5 +1,5 @@
 import * as React from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,23 +14,23 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography
+//       variant="body2"
+//       color="text.secondary"
+//       align="center"
+//       {...props}
+//     >
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://mui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -71,22 +71,28 @@ const Login = () => {
   
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+    // <ThemeProvider theme={defaultTheme}>
+    //   <Container component="main" maxWidth="xs">
+    //     <CssBaseline />
         <Box
           sx={{
+            padding: 10,
             marginTop: 8,
+            marginLeft: 40,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+            bgcolor: '#ffffff',
+            width: '350px',
+            borderRadius: 3,
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Welcome
           </Typography>
           <Box
             component="form"
@@ -95,6 +101,7 @@ const Login = () => {
             sx={{ mt: 1 }}
           >
             <TextField
+            variant="filled"
               margin="normal"
               required
               fullWidth
@@ -140,9 +147,9 @@ const Login = () => {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
-    </ThemeProvider>
+    //     <Copyright sx={{ mt: 8, mb: 4 }} />
+    //   </Container>
+    // </ThemeProvider>
   );
 };
 
