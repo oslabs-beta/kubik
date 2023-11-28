@@ -22,7 +22,7 @@ app.use(
 app.use(
   session({
     // exposed secret
-    secret: 'secretSanta',
+    secret: 'secretSanta', // change when in production
     resave: false,
     saveUninitialized: false,
     name: 'kubik_sid',
@@ -33,7 +33,9 @@ app.use(
     }),
     cookie: {
       secure: process.env.NODE_ENV === 'production',
+      httpOnly: true, // prevents client-side JS from reading the cookie
       maxAge: 1000 * 60 * 60 * 24, // 1 day
+      sameSite: 'lax'
     },
   })
 );
