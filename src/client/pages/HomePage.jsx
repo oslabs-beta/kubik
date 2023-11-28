@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom'; // Import useLocation
 import Grid from '@mui/material/Grid';
 // import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -20,6 +21,9 @@ const HomePage = () => {
   // State for showing Cluster modal
   const [open, setOpen] = useState(false);
   const [clusters, setClusters] = useState([]);
+
+  // useLocation hook to get current location
+  // const location = useLocation();
 
   // Function to handle search bar functionality
   const getSearchBar = () => {
@@ -111,6 +115,9 @@ const HomePage = () => {
   return (
     <GridWrapper>
       <CommonCard header={getSearchBar()} content={getCluster()} />
+      <Link to={{ pathname: '/dashboard', state: { clusterData: clusters } }}>
+        Go to Dashboard
+      </Link>
       <NewClusterModal
         open={open}
         onClose={() => setOpen(false)}
