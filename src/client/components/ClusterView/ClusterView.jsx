@@ -116,11 +116,20 @@ const ClusterView = () => {
     edges: {
       color: '#000000',
     },
-    height: '100%',
+    height: '800px',
+    interaction: {
+      zoomView: false, // disable zooming initially
+    },
+    configure: {
+      enabled: false,
+    },
+    physics: {
+      enabled: true,
+    },
   };
 
   return isLoading ? (
-    <div>Loading Kubernetes Cluster...</div>
+    <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
   ) : (
     <Graph graph={clusterData} options={options} />
   );
