@@ -35,7 +35,7 @@ app.use(
       secure: process.env.NODE_ENV === 'production',
       httpOnly: true, // prevents client-side JS from reading the cookie
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-      sameSite: 'lax'
+      sameSite: 'lax',
     },
   })
 );
@@ -45,8 +45,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // check session
 app.get('/', require('./controllers/sessionController').checkSession);
-
-//
 
 // needs directory check
 app.use(express.static(path.resolve(__dirname, '../client')));
