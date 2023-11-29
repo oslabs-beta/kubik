@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Graph from 'react-graph-vis';
+import deployImg from '../../../assets/deploy.png';
+import nodeImg from '../../../assets/node.png';
+import podImg from '../../../assets/pod.png';
+import svcImg from '../../../assets/svc.png';
 
 const ClusterView = () => {
   // declare state variables
@@ -18,8 +22,11 @@ const ClusterView = () => {
     clusterData.nodes.forEach((node, idx) => {
       nodes.push({
         id: `node-${idx}`,
-        label: `Node: ${node}`,
+        // label: `Node: ${node}`,
+        label: '',
         title: `Node: ${node}`,
+        image: nodeImg,
+        shape: 'image',
       });
     });
 
@@ -27,8 +34,11 @@ const ClusterView = () => {
     clusterData.pods.forEach((pod, idx) => {
       nodes.push({
         id: `pod-${idx}`,
-        label: `Pod: ${pod.name}`,
+        // label: `Pod: ${pod.name}`,
+        label: '',
         title: `Pod: ${pod.name}`,
+        image: podImg,
+        shape: 'image',
       });
 
       // Populate pods/nodes relationship in edge array
@@ -47,8 +57,11 @@ const ClusterView = () => {
     clusterData.services.forEach((service, idx) => {
       nodes.push({
         id: `service-${idx}`,
-        label: `Service: ${service}`,
+        // label: `Service: ${service}`,
+        label: '',
         title: `Service: ${service}`,
+        image: svcImg,
+        shape: 'image',
       });
 
       // Populate servives/pod relationships in edges array
@@ -71,8 +84,11 @@ const ClusterView = () => {
     clusterData.deployments.forEach((deployment, idx) => {
       nodes.push({
         id: `deployment-${idx}`,
-        label: `Deployment: ${deployment}`,
+        // label: `Deployment: ${deployment}`,
+        label: '',
         title: `Deployment: ${deployment}`,
+        image: deployImg,
+        shape: 'image',
       });
 
       // Deployment/Pod
