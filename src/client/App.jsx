@@ -11,6 +11,10 @@ import { useLocation } from 'react-router-dom';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 // import MainPage from './pages/MainPage';
 
+if (typeof global === 'undefined') {
+  window.global = window;
+}
+
 const App = () => {
   // const navigate = useNavigate();
   const [userId, setUserId] = useState('');

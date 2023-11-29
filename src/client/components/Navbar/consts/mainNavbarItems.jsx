@@ -23,7 +23,7 @@ export const mainNavbarItems = [
     id: 2,
     icon: <ImageIcon />,
     label: 'Cluster Map',
-    route: 'cluster-map',
+    route: 'cluster-view',
   },
   {
     id: 3,

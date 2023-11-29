@@ -44,10 +44,8 @@ const viewController = {
           name: pod.metadata.name,
           nodeName: pod.spec.nodeName,
         })),
-        services: {
-          name: services.body.items.map((service) => service.metadata.name),
-          svcPodRelation,
-        },
+        services: services.body.items.map((service) => service.metadata.name),
+        servicesPodRelation: svcPodRelation,
         deployments: deployments.body.items.map(
           (deployment) => deployment.metadata.name
         ),
