@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import Alerts from './pages/Alerts.jsx';
 import Main from './pages/MainPage.jsx';
+import ClusterView from './components/ClusterView/ClusterView.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={dashboardTheme}>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />}>
           <Route path="home" element={<HomePage />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="cluster-view" element={<ClusterView />} />
           <Route path="alerts" element={<Alerts />} />
         </Route>
       </Routes>
