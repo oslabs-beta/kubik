@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 //import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,145 +12,119 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// function Copyright(props) {
-//   return (
-//     <Typography
-//       variant="body2"
-//       color="text.secondary"
-//       align="center"
-//       {...props}
-//     >
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-// const defaultTheme = createTheme();
+// import Container from '@mui/material/Container';
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-  
+
     try {
       const response = await fetch('http://localhost:3020/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username: data.get('email'), // assuming email is used as username
-          password: data.get('password'),
-        }),
-        credentials: 'include', // necessary for cookies to be sent and received
+        body: JSON.stringify({ username, password }),
+        credentials: 'include',
       });
-  
-      const responseData = await response.json();
-  
-      if (response.ok) {
-        console.log('Login Successful:', responseData);
-        // handle successful login (redirect or change state?)
+
+      // responseUsername is string from backend
+      // may need it to render username on the main dashboard
+      const responseUsername = await response.json();
+
+      if (!response.ok) {
+        // need logic for failed auth
+        console.error('Login Failed:');
       } else {
-        console.error('Login Failed:', responseData);
-        // handle login errors
+        // reroute to mainpage
+        // Branden might need to change this
+        navigate('/');
       }
     } catch (error) {
+      // need error handler
       console.error('Error during login:', error);
-      // handle network error
     }
   };
-  
 
   return (
-    // <ThemeProvider theme={defaultTheme}>
-    //   <Container component="main" maxWidth="xs">
-    //     <CssBaseline />
-        <Box
-          sx={{
-            padding: 10,
-            marginTop: 8,
-            marginLeft: 40,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-            bgcolor: '#ffffff',
-            width: '350px',
-            borderRadius: 3,
-          }}
+    // <Container component="main" maxWidth="xs">
+    //   <CssBaseline />
+    <Box
+      sx={{
+        padding: 10,
+        marginTop: 8,
+        marginLeft: 40,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+        bgcolor: '#ffffff',
+        width: '350px',
+        borderRadius: 3,
+      }}
+    >
+      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography component="h1" variant="h5">
+        Welcome
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <TextField
+          autoComplete="username"
+          id="username"
+          label="Username"
+          margin="normal"
+          name="username"
+          autoFocus
+          fullWidth
+          required
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <TextField
+          autoComplete="current-password"
+          id="password"
+          label="Password"
+          margin="normal"
+          name="password"
+          type="password"
+          fullWidth
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Welcome
-          </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
-            <TextField
-            variant="filled"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-    //     <Copyright sx={{ mt: 8, mb: 4 }} />
-    //   </Container>
-    // </ThemeProvider>
+          Sign In
+        </Button>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link href="/signup" variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
+    // </Container>
   );
 };
 

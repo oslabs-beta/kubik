@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Alerts from './pages/Alerts.jsx';
 import Main from './pages/MainPage.jsx';
 import Login from './pages/Login.jsx';
+import Signup from './pages/Signup.jsx';
 import ClusterView from './components/ClusterView/ClusterView.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           <Route path="cluster-view" element={<ClusterView />} />
           <Route path="alerts" element={<Alerts />} />
           <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
     </BrowserRouter>
