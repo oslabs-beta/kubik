@@ -25,3 +25,5 @@ const NodeList = ({ props }) => {
     },
   ]);
 };
+
+export default NodeList;

@@ -4,6 +4,7 @@ import PublicIcon from '@mui/icons-material/Public';
 // import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
 // import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
 import DnsIcon from '@mui/icons-material/Dns';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 export const mainNavbarItems = [
   {
@@ -30,6 +31,12 @@ export const mainNavbarItems = [
     label: 'Alerts',
     route: 'alerts',
   },
+  {
+    id: 4,
+    icon: <AssignmentIcon />,
+    label: 'Login',
+    route: 'login',
+  }
   // {
   //   id: 4,
   //   icon: <SettingsEthernetIcon />,

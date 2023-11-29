@@ -21,28 +21,23 @@ const App = () => {
   const grafanaDashboardUrl =
     'http://localhost:3000/d/rYdddlPWk/node-exporter-full?orgId=1';
 
+  // state to pass cluster info to dashboard
+  // const [clusterInfo, setClusterInfo] = useState([]);
+
   // state for titles
-  const [title, setTitle] = useState(null);
-  const location = useLocation();
+  // const [title, setTitle] = useState(null);
+  // const location = useLocation();
 
   // useEffect to set title of page
-  useEffect(() => {
-    const parsedTitle = location.pathname.replace(/\W/g, ' ');
-    setTitle(parsedTitle);
-  }, [location]);
+  // useEffect(() => {
+  //   const parsedTitle = location.pathname.replace(/\W/g, ' ');
+  //   setTitle(parsedTitle);
+  // }, [location]);
 
   return (
     <Grid container>
       <Navbar />
-      <Header title={title} />
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <GrafanaDashboard grafanaDashboardUrl={grafanaDashboardUrl} />
-          }
-        />
-      </Routes>
+      {/* <Header title={title} /> */}
       <Outlet />
     </Grid>
   );
