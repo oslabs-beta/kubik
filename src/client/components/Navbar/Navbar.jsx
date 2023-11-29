@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import { useParams, useNavigate } from 'react-router-dom';
+import CommonButton from '../common/CommonButton/CommonButton';
 
 // Import from mainNavbarItems, then use map to iterate through arr of items to display in navbar
 import { mainNavbarItems } from './consts/mainNavbarItems';
@@ -15,6 +16,26 @@ import { navbarStyles } from './styles';
 
 const Navbar = () => {
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('http://localhost:3020/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        console.log('loggedout');
+        navigate('/login');
+      } else {
+        // need to handle error
+        console.log('Failed to Sign Out');
+      }
+    } catch (error) {
+      // need logic to handle error
+      console.error('Network error:', error);
+    }
+  };
 
   return (
     <Drawer sx={navbarStyles.drawer} variant="permanent" anchor="left">
@@ -28,6 +49,16 @@ const Navbar = () => {
           </ListItemButton>
         ))}
       </List>
+      <CommonButton
+        variant="contained"
+        onClick={handleLogout}
+        size="large"
+        sx={{
+          fontSize: '1.05rem',
+        }}
+      >
+        Logout
+      </CommonButton>
     </Drawer>
   );
 };
