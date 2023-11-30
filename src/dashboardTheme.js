@@ -10,9 +10,9 @@ export const dashboardTheme = createTheme({
           borderRadius: 8.5,
           textTransform: 'none',
           '&.MuiButton-contained': {
-            backgroundColor: '#009be5',
+            backgroundColor: '#5193B3',
             '&:hover': {
-              backgroundColor: '#006db3',
+              backgroundColor: '#c0c4c7',
             },
           },
           '&.MuiButton-outlined': {
