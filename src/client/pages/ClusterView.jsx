@@ -224,6 +224,8 @@ const ClusterView = () => {
             top: 0,
             right: 0,
             margin: '10px',
+            marginTop: '15px',
+            marginRight: '-90px',
             zIndex: 1,
             borderRadius: '4px',
             background: 'rgba(108, 122, 137, 0.8)',
