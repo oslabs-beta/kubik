@@ -26,7 +26,7 @@ const Navbar = () => {
 
       if (response.ok) {
         console.log('loggedout');
-        navigate('/login');
+        navigate('/');
       } else {
         // need to handle error
         console.log('Failed to Sign Out');
