@@ -226,10 +226,10 @@ const ClusterView = () => {
           margin: '10px',
           zIndex: 1,
           borderRadius: '4px',
-          background: 'rgba(108, 122, 137, 0.8)', // Match the tooltip background color
+          background: 'rgba(108, 122, 137, 0.8)',
           padding: '8px',
-          color: 'white', // Match the tooltip text color
-          border: 'none', // Remove the button border
+          color: 'white',
+          border: 'none',
           cursor: 'pointer',
         }}
       >
