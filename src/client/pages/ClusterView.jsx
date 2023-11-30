@@ -41,8 +41,6 @@ const ClusterView = () => {
   const [graphOptions, setGraphOptions] = useState(initialOptions);
   const [graphKey, setGraphKey] = useState(0);
 
-  console.log('graphOptions', graphOptions);
-
   useEffect(() => {
     // Update the key to force re-render
     setGraphKey((prevKey) => prevKey + 1);
