@@ -112,20 +112,22 @@ const Dashboard = () => {
         credentials: 'include',
       });
       const result = await response.json();
+      console.log(result);
       return result;
     } catch (err) {
       console.log(err, 'Cluster POST request unsuccessful');
     }
   };
 
-  // Function to get cluster data
-  const getNodesList = async () => {
-    const data = await getCluster();
-    console.log(data);
-    nodesArr.push({ ...data });
-  };
+  useEffect(() => {
+    const fetchNodes = async () => {
+      const nodes = await getCluster();
+      setNodesArr(nodes);
+    };
 
-  getNodesList();
+    fetchNodes();
+  }, []);
+
   // Function to display
   const getDisplay = () => (
     <>
