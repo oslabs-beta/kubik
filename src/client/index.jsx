@@ -12,7 +12,7 @@ import Alerts from './pages/Alerts.jsx';
 import MainPage from './pages/MainPage.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
-import ClusterView from './components/ClusterView/ClusterView.jsx';
+import ClusterView from './pages/ClusterView.jsx';
 // import MainPage from './pages/MainPage.jsx';
 import { AuthProvider } from './pages/AuthContext.jsx';
 import { UserProvider } from './pages/UserContext.jsx';

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Graph from 'react-graph-vis';
-import deployImg from '../../../assets/deploy.png';
-import nodeImg from '../../../assets/node.png';
-import podImg from '../../../assets/pod.png';
-import svcImg from '../../../assets/svc.png';
+import deployImg from '../../assets/deploy.png';
+import nodeImg from '../../assets/node.png';
+import podImg from '../../assets/pod.png';
+import svcImg from '../../assets/svc.png';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
@@ -219,8 +219,20 @@ const ClusterView = () => {
   return isLoading ? (
     <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
   ) : (
-    <div>
-      <button onClick={changeGraphOptions}>Change Graph Style</button>
+    <div style={{ position: 'relative' }}>
+      <button
+        onClick={changeGraphOptions}
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          margin: '10px',
+          zIndex: 1,
+          borderRadius: '4px',
+        }}
+      >
+        Switch Graph Type
+      </button>
 
       <Graph
         key={graphKey}
