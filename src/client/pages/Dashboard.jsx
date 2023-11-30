@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 // import Grid from '@mui/material/Grid';
-import { useLocation } from 'react-router-dom';
 import Panel from '../components/Panel/Panel';
 import GridWrapper from '../components/common/GridWrapper/GridWrapper';
 import Box from '@mui/material/Box';
@@ -13,6 +12,12 @@ import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
+import CommonCard from '../components/common/CommonCard/CommonCard';
+import SearchBar from '../components/common/SearchBar/SearchBar';
+import CommonButton from '../components/common/CommonButton/CommonButton';
+import { IconButton } from '@mui/material';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import { v4 as uuidv4 } from 'uuid';
 
 // const Item = styled('div')(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#262B32' : '#fff',
@@ -30,59 +35,120 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Dashboard = () => {
-  // useLocation to get clusterData from HomePage
-  const location = useLocation();
-  // Deconstruct clusterData from location.state
-  const { clusterData } = location.state || { clusterData: [] };
-  console.log(clusterData);
-
-  const [currTab, setCurrTab] = useState('nodes');
+  // const [currTab, setCurrTab] = useState('nodes');
   const [nodesArr, setNodesArr] = useState([]);
-  const [podsArr, setPodsArr] = useState([]);
-  const [deploymentsArr, setDeploymentsArr] = useState([]);
-  const [servicesArr, setServicesArr] = useState([]);
+  // const [podsArr, setPodsArr] = useState([]);
+  // const [deploymentsArr, setDeploymentsArr] = useState([]);
+  // const [servicesArr, setServicesArr] = useState([]);
 
-  const [podsShowStatus, setPodsShowStatus] = useState(false);
-  const [deploymentShowStatus, setDeploymentShowStatus] = useState(false);
-  const [servicesShowStatus, setServicesShowStatus] = useState(false);
+  // const [podsShowStatus, setPodsShowStatus] = useState(false);
+  // const [deploymentShowStatus, setDeploymentShowStatus] = useState(false);
+  // const [servicesShowStatus, setServicesShowStatus] = useState(false);
+
+  // Function to handle search bar functionality
+  const getSearchBar = () => {
+    // Function to handle user inputs
+    const handleChange = (value) => {
+      console.log(value);
+    };
+
+    // Styles obj
+    // TODO: Need to move styles to its own file
+    const headerStyles = {
+      wrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingLeft: '20px',
+        paddingRight: '20px',
+        height: '65px',
+        backgroundColor: '#f5f5f5',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.12',
+      },
+      addClusterButton: {
+        fontSize: '1.05rem',
+      },
+    };
+
+    return (
+      <Box sx={headerStyles.wrapper}>
+        <SearchBar
+          placeholder="Search for a cluster"
+          onChange={(e) => handleChange(e.target.value)}
+          searchBarWidth="720px"
+        />
+        <Box>
+          {/* <CommonButton
+            variant="contained"
+            onClick={addCluster}
+            size="large"
+            sx={headerStyles.addClusterButton}
+          >
+            Add cluster
+          </CommonButton> */}
+          <IconButton>
+            <RefreshIcon />
+          </IconButton>
+        </Box>
+      </Box>
+    );
+  };
 
   /**
    * Nodes
    */
-  const [nodeShowStatus, setNodeShowStatus] = useState(false);
+  const [nodeShowStatus, setNodeShowStatus] = useState(true);
 
   // Function to handle tab change
-  const handleNodeShowStatus = () => {
-    setDeploymentShowStatus(false);
-    setNodeShowStatus(!nodeShowStatus);
-  };
+  // const handleNodeShowStatus = () => {
+  //   setDeploymentShowStatus(false);
+  //   setNodeShowStatus(!nodeShowStat);
+  // };
 
+  // Function to send GET request to db
   const getCluster = async () => {
     try {
       const response = await fetch('http://localhost:3020/api/cluster/get/', {
         credentials: 'include',
       });
       const result = await response.json();
+      return result;
     } catch (err) {
       console.log(err, 'Cluster POST request unsuccessful');
     }
   };
 
-  // Fetch nodes and populate nodesArr
-  // useEffect(() => {
-  //   fetch(`${clusterUrl}/api/cluster/get`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (NodeShowStatus) {
-  //         setNodesArr(data);
-  //       }
-  //     });
-  // }, [nodesArr]);
+  // Function to get cluster data
+  const getNodesList = async () => {
+    const data = await getCluster();
+    console.log(data);
+    nodesArr.push({ ...data });
+  };
 
-  /**
-   * Conditions to determine what to render
-   */
+  getNodesList();
+  // Function to display
+  const getDisplay = () => (
+    <>
+      {nodesArr.length ? (
+        nodesArr.map((node, index) => (
+          <Box key={uuidv4()} index={index} sx={{ marginBottom: '20px' }}>
+            <iframe src={node} width="300" height="300" />
+          </Box>
+        ))
+      ) : (
+        <Typography
+          align="center"
+          sx={{
+            margin: '40px 16px',
+            color: 'rgba(0, 0, 0, 0.6)',
+            fontSize: '1.3rem',
+          }}
+        >
+          No data to display. 🫡🫡🫡
+        </Typography>
+      )}
+    </>
+  );
 
   return (
     <GridWrapper>
@@ -112,6 +178,7 @@ const Dashboard = () => {
               </Stack>
             </Stack>
           </Stack>
+          <CommonCard header={getSearchBar()} content={getDisplay()} />
         </Container>
       </Box>
     </GridWrapper>

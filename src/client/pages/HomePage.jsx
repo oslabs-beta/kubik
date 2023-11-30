@@ -99,7 +99,7 @@ const HomePage = () => {
           align="center"
           sx={{
             margin: '40px 16px',
-            color: 'rgba(0, 0, 0, 0.6',
+            color: 'rgba(0, 0, 0, 0.6)',
             fontSize: '1.3rem',
           }}
         >

@@ -51,12 +51,13 @@ const MainPage = () => {
 
   return (
     <Grid container>
-      <Navbar
+      {/* <Navbar
         className="nav-bar"
         key={uuidv4()}
-        // toggleDashboard={toggleDashboard}
-        // setToggleDashboard={setToggleDashboard}
-      />
+        toggleDashboard={toggleDashboard}
+        setToggleDashboard={setToggleDashboard}
+      /> */}
+
       <Outlet />
     </Grid>
   );
