@@ -4,7 +4,6 @@ import deployImg from '../../assets/deploy.png';
 import nodeImg from '../../assets/node.png';
 import podImg from '../../assets/pod.png';
 import svcImg from '../../assets/svc.png';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 let initialOptions = {
@@ -227,6 +226,11 @@ const ClusterView = () => {
           margin: '10px',
           zIndex: 1,
           borderRadius: '4px',
+          background: 'rgba(108, 122, 137, 0.8)', // Match the tooltip background color
+          padding: '8px',
+          color: 'white', // Match the tooltip text color
+          border: 'none', // Remove the button border
+          cursor: 'pointer',
         }}
       >
         Switch Graph Type
@@ -239,26 +243,24 @@ const ClusterView = () => {
         events={events}
       />
       {showTooltip && (
-        <Tooltip title={tooltipContent} placement="top" arrow>
-          <div
-            style={{
-              position: 'absolute',
-              top: tooltipPosition.y,
-              left: tooltipPosition.x,
-              maxWidth: '200px',
-              background: 'rgba(108, 122, 137, 0.9)',
-              padding: '8px',
-              borderRadius: '4px',
-            }}
+        <div
+          style={{
+            position: 'absolute',
+            top: tooltipPosition.y,
+            left: tooltipPosition.x,
+            maxWidth: '200px',
+            background: 'rgba(108, 122, 137, 0.9)',
+            padding: '8px',
+            borderRadius: '4px',
+          }}
+        >
+          <Typography
+            variant="body1"
+            style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}
           >
-            <Typography
-              variant="body1"
-              style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}
-            >
-              {tooltipContent}
-            </Typography>
-          </div>
-        </Tooltip>
+            {tooltipContent}
+          </Typography>
+        </div>
       )}
     </div>
   );
