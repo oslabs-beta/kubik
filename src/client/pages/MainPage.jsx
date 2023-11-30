@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 // import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { v4 as uuidv4 } from 'uuid';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import HomePage from './HomePage';
 // import Panel from '../components/Panel/Panel';
 
@@ -42,7 +42,7 @@ const MainPage = ({ userId, setUserId }) => {
   const [cluster, setCluster] = useState([]);
   const [currCluster, setCurrCluster] = useState(defaultCluster);
   // const [clusterFetcher, setClusterFetched] = useState(false);
-  const [toggleDashboard, setToggleDashboard] = useState('home');
+  // const [toggleDashboard, setToggleDashboard] = useState('home');
   const [showClusterEditor, setShowClusterEditor] = useState(false);
 
   const navigate = useNavigate();
@@ -57,42 +57,42 @@ const MainPage = ({ userId, setUserId }) => {
     />
   );
 
-  // Conditionals for what to render: cluster or dashboard
-  if (toggleDashboard === 'home') {
-    mainComponent = (
-      <HomePage
-        key={uuidv4()}
-        userId={userId}
-        cluster={cluster}
-        setCluster={setCluster}
-        showClusterEditor={showClusterEditor}
-        setShowClusterEditor={setShowClusterEditor}
-      />
-    );
-  } else {
-    mainComponent = (
-      <Dashboard
-        key={uuidv4()}
-        userId={userId}
-        cluster={cluster}
-        currCluster={currCluster}
-        toggleDashboard={toggleDashboard}
-        setToggleDashboard={setToggleDashboard}
-      />
-    );
-  }
+  // // Conditionals for what to render: cluster or dashboard
+  // if (toggleDashboard === 'home') {
+  //   mainComponent = (
+  //     <HomePage
+  //       key={uuidv4()}
+  //       userId={userId}
+  //       cluster={cluster}
+  //       setCluster={setCluster}
+  //       showClusterEditor={showClusterEditor}
+  //       setShowClusterEditor={setShowClusterEditor}
+  //     />
+  //   );
+  // } else {
+  //   mainComponent = (
+  //     <Dashboard
+  //       key={uuidv4()}
+  //       userId={userId}
+  //       cluster={cluster}
+  //       currCluster={currCluster}
+  //       toggleDashboard={toggleDashboard}
+  //       setToggleDashboard={setToggleDashboard}
+  //     />
+  //   );
+  // }
 
   return (
     <Grid container>
       <Navbar
         className="nav-bar"
         key={uuidv4()}
-        toggleDashboard={toggleDashboard}
-        setToggleDashboard={setToggleDashboard}
+        // toggleDashboard={toggleDashboard}
+        // setToggleDashboard={setToggleDashboard}
       />
-      <div>{mainComponent}</div>
+      <Outlet />
     </Grid>
   );
 };
-
+//  {/* <div>{mainComponent}</div> */}
 export default MainPage;
