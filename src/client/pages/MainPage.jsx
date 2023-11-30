@@ -4,12 +4,14 @@ import Grid from '@mui/material/Grid';
 // import { Outlet } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 import { v4 as uuidv4 } from 'uuid';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
 import HomePage from './HomePage';
 // import Panel from '../components/Panel/Panel';
 
 // This page will determine what to render: login or home page
-const MainPage = ({ userId, setUserId }) => {
+const MainPage = () => {
+  const { userId, setUserId } = useOutletContext();
+
   // Declaring default values for dashboard
   const defaultDashboard = {
     apiServer: {
@@ -45,42 +47,7 @@ const MainPage = ({ userId, setUserId }) => {
   // const [toggleDashboard, setToggleDashboard] = useState('home');
   const [showClusterEditor, setShowClusterEditor] = useState(false);
 
-  const navigate = useNavigate();
-
-  // declare mainComponent that will render 'HomePage' and clusterEditor
-  let mainComponent = (
-    <HomePage
-      userId={userId}
-      cluster={cluster}
-      setCluster={setCluster}
-      showClusterEditor={showClusterEditor}
-    />
-  );
-
-  // // Conditionals for what to render: cluster or dashboard
-  // if (toggleDashboard === 'home') {
-  //   mainComponent = (
-  //     <HomePage
-  //       key={uuidv4()}
-  //       userId={userId}
-  //       cluster={cluster}
-  //       setCluster={setCluster}
-  //       showClusterEditor={showClusterEditor}
-  //       setShowClusterEditor={setShowClusterEditor}
-  //     />
-  //   );
-  // } else {
-  //   mainComponent = (
-  //     <Dashboard
-  //       key={uuidv4()}
-  //       userId={userId}
-  //       cluster={cluster}
-  //       currCluster={currCluster}
-  //       toggleDashboard={toggleDashboard}
-  //       setToggleDashboard={setToggleDashboard}
-  //     />
-  //   );
-  // }
+  // const navigate = useNavigate();
 
   return (
     <Grid container>
@@ -94,5 +61,41 @@ const MainPage = ({ userId, setUserId }) => {
     </Grid>
   );
 };
-//  {/* <div>{mainComponent}</div> */}
+
 export default MainPage;
+
+//  {/* <div>{mainComponent}</div> */}
+// declare mainComponent that will render 'HomePage' and clusterEditor
+// let mainComponent = (
+//   <HomePage
+//     userId={userId}
+//     cluster={cluster}
+//     setCluster={setCluster}
+//     showClusterEditor={showClusterEditor}
+//   />
+// );
+
+// // Conditionals for what to render: cluster or dashboard
+// if (toggleDashboard === 'home') {
+//   mainComponent = (
+//     <HomePage
+//       key={uuidv4()}
+//       userId={userId}
+//       cluster={cluster}
+//       setCluster={setCluster}
+//       showClusterEditor={showClusterEditor}
+//       setShowClusterEditor={setShowClusterEditor}
+//     />
+//   );
+// } else {
+//   mainComponent = (
+//     <Dashboard
+//       key={uuidv4()}
+//       userId={userId}
+//       cluster={cluster}
+//       currCluster={currCluster}
+//       toggleDashboard={toggleDashboard}
+//       setToggleDashboard={setToggleDashboard}
+//     />
+//   );
+// }
