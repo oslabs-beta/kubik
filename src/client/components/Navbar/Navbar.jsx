@@ -53,9 +53,12 @@ const Navbar = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          height: '100%',
           alignItems: 'center',
-          width: '100%',
+          marginBottom: '30px',
+          // width: '100%',
           padding: '16px',
         }}
       >
