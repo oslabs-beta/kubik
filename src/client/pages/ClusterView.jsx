@@ -255,8 +255,11 @@ const ClusterView = () => {
           }}
         >
           <Typography
-            variant="body1"
-            style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}
+            style={{
+              fontFamily: 'Roboto, sans-serif',
+              color: 'white',
+              fontSize: '13px',
+            }}
           >
             {tooltipContent}
           </Typography>
