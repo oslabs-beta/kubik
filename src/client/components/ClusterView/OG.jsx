@@ -16,18 +16,18 @@ const ClusterView = () => {
   const [selectedNode, setSelectedNode] = useState(null);
 
   // Hover event handlers
-  // const handleNodeHover = (event) => {
-  //   const { nodes } = event;
-  //   if (nodes.length > 0) {
-  //     setSelectedNode(nodes[0]);
-  //   } else {
-  //     setSelectedNode(null);
-  //   }
-  // };
+  const handleNodeHover = (event) => {
+    const { nodes } = event;
+    if (nodes.length > 0) {
+      setSelectedNode(nodes[0]);
+    } else {
+      setSelectedNode(null);
+    }
+  };
 
-  // const handleNodeUnhover = () => {
-  //   setSelectedNode(null);
-  // };
+  const handleNodeUnhover = () => {
+    setSelectedNode(null);
+  };
 
   // Accept nodes, pods.name, services, deployments
   const processData = (clusterData) => {
@@ -174,50 +174,9 @@ const ClusterView = () => {
   };
 
   // Event handling
-  // const events = {
-  //   selectNode: (event) => handleNodeHover(event),
-  //   deselectNode: () => handleNodeUnhover(),
-  // };\
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [tooltipContent, setTooltipContent] = useState('');
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-
-  const handleNodeHover = (event) => {
-    console.log('event', event);
-    const {
-      node,
-      pointer: { DOM },
-    } = event;
-    let founded;
-    if (node.length > 0) {
-      console.log('nodes[0]', node);
-      console.log('nodesnodes', clusterData);
-      const found = clusterData.nodes.find((n) => {
-        console.log('N', n);
-        console.log('Nid', n.id);
-        console.log('Nodezero', node[0]);
-        n.id === node;
-        console.log(n.id === node);
-        if (n.id === node) {
-          founded = n;
-        }
-      });
-      console.log('foundnodes', founded);
-      if (founded) {
-        setTooltipContent(founded.title);
-        setTooltipPosition({ x: DOM.x, y: DOM.y });
-        setShowTooltip(true);
-      }
-    }
-  };
-
-  const handleNodeUnhover = () => {
-    setShowTooltip(false);
-  };
-
   const events = {
-    hoverNode: handleNodeHover,
-    blurNode: handleNodeUnhover,
+    selectNode: (event) => handleNodeHover(event),
+    deselectNode: () => handleNodeUnhover(),
   };
 
   return isLoading ? (
@@ -225,20 +184,6 @@ const ClusterView = () => {
   ) : (
     <div>
       <Graph graph={clusterData} options={options} events={events} />
-      {showTooltip && (
-        <Tooltip title={tooltipContent} placement="top" arrow>
-          <div
-            style={{
-              position: 'absolute',
-              top: tooltipPosition.y,
-              left: tooltipPosition.x,
-            }}
-          >
-            {/* Content you want to display in the tooltip */}
-            {tooltipContent}
-          </div>
-        </Tooltip>
-      )}
     </div>
   );
 };
