@@ -14,7 +14,4 @@ router.use('/cluster', clusterRouter);
 // View router for cluster map visualization
 router.use('/view', viewRouter);
 
-// Grafana dashboard router
-// router.use('/dashboard', grafanaRouter);
-
 module.exports = router;

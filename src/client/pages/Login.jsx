@@ -40,9 +40,6 @@ const Login = () => {
       const responseUsername = await response.json();
 
       if (response.ok) {
-        // need logic for failed auth
-        // console.error('Login Failed:');
-        // Update authentication state
         login();
         // Redirect to main page
         navigate('/main-page');

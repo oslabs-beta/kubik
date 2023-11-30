@@ -22,7 +22,7 @@ app.use(
 app.use(
   session({
     // exposed secret
-    secret: 'secretSanta', // change when in production
+    secret: 'secretSanta',
     resave: false,
     saveUninitialized: false,
     name: 'kubik_sid',
@@ -33,7 +33,7 @@ app.use(
     }),
     cookie: {
       secure: process.env.NODE_ENV === 'production',
-      httpOnly: true, // prevents client-side JS from reading the cookie
+      httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day
       sameSite: 'lax',
     },
@@ -48,13 +48,6 @@ app.get('/', require('./controllers/sessionController').checkSession);
 
 // needs directory check
 app.use(express.static(path.resolve(__dirname, '../client')));
-
-// needs edit
-// get request to root endpt, send index.html file as the response
-// app.get('/', (req, res) => {
-//   console.log('Backend and frontend linked');
-//   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-// });
 
 // routes
 app.use('/api', router);

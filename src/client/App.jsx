@@ -18,11 +18,6 @@ if (typeof global === 'undefined') {
 }
 
 const App = () => {
-  // const navigate = useNavigate();
-  // const [userId, setUserId] = useState('');
-  // const grafanaDashboardUrl =
-  //   'http://localhost:3000/d/rYdddlPWk/node-exporter-full?orgId=1';
-
   const { isLoggedIn } = useAuth();
   const { userId, setUserId } = useUser();
 
@@ -41,34 +36,3 @@ const App = () => {
 };
 
 export default App;
-
-// {
-/* <DndProvider backend={HTML5Backend}>
-<Routes>
-  <Route
-    path="/"
-    element={<MainPage userId={userId} setUserId={setUserId} />}
-  />
-  <Route path="/mainPage"></Route>
-  <Route
-    path="/dashboard"
-    element={
-      <GrafanaDashboard grafanaDashboardUrl={grafanaDashboardUrl} />
-    }
-  />
-</Routes>
-</DndProvider> */
-// }
-
-// state to pass cluster info to dashboard
-// const [clusterInfo, setClusterInfo] = useState([]);
-
-// state for titles
-// const [title, setTitle] = useState(null);
-// const location = useLocation();
-
-// useEffect to set title of page
-// useEffect(() => {
-//   const parsedTitle = location.pathname.replace(/\W/g, ' ');
-//   setTitle(parsedTitle);
-// }, [location]);
