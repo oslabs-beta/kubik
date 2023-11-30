@@ -42,7 +42,7 @@ const Navbar = () => {
       <Toolbar />
       <Divider />
       <List>
-        {mainNavbarItems.map((item, index) => (
+        {mainNavbarItems.map((item) => (
           <ListItemButton key={item.id} onClick={() => navigate(item.route)}>
             <ListItemIcon sx={navbarStyles.icons}>{item.icon}</ListItemIcon>
             <ListItemText sx={navbarStyles.text} primary={item.label} />
