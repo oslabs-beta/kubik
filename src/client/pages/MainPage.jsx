@@ -1,11 +1,9 @@
-// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import Grid from '@mui/material/Grid';
-// import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Navbar/Navbar';
+// import Navbar from '../components/Navbar/Navbar';
 import { v4 as uuidv4 } from 'uuid';
 import { Outlet, useNavigate, useOutletContext } from 'react-router-dom';
-import HomePage from './HomePage';
+// import HomePage from './HomePage';
 // import Panel from '../components/Panel/Panel';
 
 // This page will determine what to render: login or home page
@@ -64,39 +62,3 @@ const MainPage = () => {
 };
 
 export default MainPage;
-
-//  {/* <div>{mainComponent}</div> */}
-// declare mainComponent that will render 'HomePage' and clusterEditor
-// let mainComponent = (
-//   <HomePage
-//     userId={userId}
-//     cluster={cluster}
-//     setCluster={setCluster}
-//     showClusterEditor={showClusterEditor}
-//   />
-// );
-
-// // Conditionals for what to render: cluster or dashboard
-// if (toggleDashboard === 'home') {
-//   mainComponent = (
-//     <HomePage
-//       key={uuidv4()}
-//       userId={userId}
-//       cluster={cluster}
-//       setCluster={setCluster}
-//       showClusterEditor={showClusterEditor}
-//       setShowClusterEditor={setShowClusterEditor}
-//     />
-//   );
-// } else {
-//   mainComponent = (
-//     <Dashboard
-//       key={uuidv4()}
-//       userId={userId}
-//       cluster={cluster}
-//       currCluster={currCluster}
-//       toggleDashboard={toggleDashboard}
-//       setToggleDashboard={setToggleDashboard}
-//     />
-//   );
-// }

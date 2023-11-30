@@ -47,7 +47,6 @@ const Signup = () => {
         console.error('Sign Up Failed:');
       } else {
         // reroute to mainpage
-        // Branden might need to change this
         navigate('/');
       }
     } catch (error) {
