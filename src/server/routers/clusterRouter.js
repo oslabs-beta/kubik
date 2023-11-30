@@ -16,9 +16,14 @@ router
   )
 
   // Get clusters
-  .get('/get', clusterController.getCluster, (req, res) => {
-    return res.status(200).json(res.locals.clusters);
-  })
+  .get(
+    '/get',
+    clusterController.getCluster,
+    chartController.getChartUrls,
+    (req, res) => {
+      return res.status(200).json(res.locals.chartUrls);
+    }
+  )
 
   // Add clusters
   .post(

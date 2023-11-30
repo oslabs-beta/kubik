@@ -57,6 +57,17 @@ const Dashboard = () => {
     setNodeShowStatus(!nodeShowStatus);
   };
 
+  const getCluster = async () => {
+    try {
+      const response = await fetch('http://localhost:3020/api/cluster/get/', {
+        credentials: 'include',
+      });
+      const result = await response.json();
+    } catch (err) {
+      console.log(err, 'Cluster POST request unsuccessful');
+    }
+  };
+
   // Fetch nodes and populate nodesArr
   // useEffect(() => {
   //   fetch(`${clusterUrl}/api/cluster/get`)

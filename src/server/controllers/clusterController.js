@@ -22,9 +22,11 @@ const clusterController = {
       const user = await User.findById(userId).populate(queryOptions).exec();
       res.locals.clusters = user.clusters;
 
-      if (clusterId) {
-        res.locals.clusterUrl = user.clusters[0]?.clusterUrl;
-      }
+      // if (clusterId) {
+      //   res.locals.clusterUrl = user.clusters[0]?.clusterUrl;
+      // }
+
+      res.locals.clusterUrl = user.clusters[0]?.clusterUrl;
 
       return next();
     } catch (error) {
