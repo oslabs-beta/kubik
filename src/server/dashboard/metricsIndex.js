@@ -1,7 +1,7 @@
 const metrics = {
   nodeExporter: {
     uid: 'rYdddlPWk',
-    panelId: [14, 15, 74, 77, 78, 84, 152, 155],
+    panelId: [74, 77, 78, 152, 155, 14, 15],
   },
   kubernetesViewsNodes: {
     uid: 'k8s_views_nodes',

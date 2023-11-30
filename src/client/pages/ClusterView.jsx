@@ -214,55 +214,60 @@ const ClusterView = () => {
   return isLoading ? (
     <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
   ) : (
-    <div style={{ position: 'relative' }}>
-      <button
-        onClick={changeGraphOptions}
-        style={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          margin: '10px',
-          zIndex: 1,
-          borderRadius: '4px',
-          background: 'rgba(108, 122, 137, 0.8)',
-          padding: '8px',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        Switch Graph Type
-      </button>
-
-      <Graph
-        key={graphKey}
-        graph={clusterData}
-        options={graphOptions}
-        events={events}
-      />
-      {showTooltip && (
-        <div
+    <div>
+      {/* Content */}
+      <div style={{ position: 'relative' }}>
+        <button
+          onClick={changeGraphOptions}
           style={{
             position: 'absolute',
-            top: tooltipPosition.y,
-            left: tooltipPosition.x,
-            maxWidth: '200px',
-            background: 'rgba(108, 122, 137, 0.9)',
-            padding: '8px',
+            top: 0,
+            right: 0,
+            margin: '10px',
+            marginTop: '15px',
+            marginRight: '-90px',
+            zIndex: 1,
             borderRadius: '4px',
+            background: 'rgba(108, 122, 137, 0.8)',
+            padding: '8px',
+            color: 'white',
+            border: 'none',
+            cursor: 'pointer',
           }}
         >
-          <Typography
+          Switch Graph Type
+        </button>
+
+        <Graph
+          key={graphKey}
+          graph={clusterData}
+          options={graphOptions}
+          events={events}
+        />
+        {showTooltip && (
+          <div
             style={{
-              fontFamily: 'Roboto, sans-serif',
-              color: 'white',
-              fontSize: '13px',
+              position: 'absolute',
+              top: tooltipPosition.y,
+              left: tooltipPosition.x,
+              maxWidth: '200px',
+              background: 'rgba(108, 122, 137, 0.9)',
+              padding: '8px',
+              borderRadius: '4px',
             }}
           >
-            {tooltipContent}
-          </Typography>
-        </div>
-      )}
+            <Typography
+              style={{
+                fontFamily: 'Roboto, sans-serif',
+                color: 'white',
+                fontSize: '13px',
+              }}
+            >
+              {tooltipContent}
+            </Typography>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

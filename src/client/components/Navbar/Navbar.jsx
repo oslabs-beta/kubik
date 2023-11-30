@@ -53,9 +53,11 @@ const Navbar = () => {
       <Box
         sx={{
           display: 'flex',
-          justifyContent: 'center',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          height: '100%',
           alignItems: 'center',
-          width: '100%',
+          marginBottom: '30px',
           padding: '16px',
         }}
       >
@@ -65,6 +67,7 @@ const Navbar = () => {
           sx={{
             fontSize: '1.05rem',
             width: '75%',
+            backgroundcolor: '#F8D49B',
           }}
         >
           Logout

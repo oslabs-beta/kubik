@@ -132,11 +132,26 @@ const Dashboard = () => {
   const getDisplay = () => (
     <>
       {nodesArr.length ? (
-        nodesArr.map((node, index) => (
-          <Box key={uuidv4()} index={index} sx={{ marginBottom: '20px' }}>
-            <iframe src={node} width="300" height="300" />
-          </Box>
-        ))
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="flex-start"
+          flexWrap="wrap"
+        >
+          {nodesArr.map((node, index) => (
+            <Box
+              key={uuidv4()}
+              index={index}
+              sx={{
+                marginBottom: '20px',
+                flex: '1 1 300px',
+                minWidth: '300px',
+              }}
+            >
+              <iframe src={node} width="300" height="300" />
+            </Box>
+          ))}
+        </Stack>
       ) : (
         <Typography
           align="center"
