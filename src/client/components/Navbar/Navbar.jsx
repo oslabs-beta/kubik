@@ -3,6 +3,7 @@ import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 // import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -49,16 +50,26 @@ const Navbar = () => {
           </ListItemButton>
         ))}
       </List>
-      <CommonButton
-        variant="contained"
-        onClick={handleLogout}
-        size="large"
+      <Box
         sx={{
-          fontSize: '1.05rem',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          padding: '16px',
         }}
       >
-        Logout
-      </CommonButton>
+        <CommonButton
+          variant="contained"
+          onClick={handleLogout}
+          sx={{
+            fontSize: '1.05rem',
+            width: '75%',
+          }}
+        >
+          Logout
+        </CommonButton>
+      </Box>
     </Drawer>
   );
 };

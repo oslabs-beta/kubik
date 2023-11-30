@@ -64,18 +64,28 @@ const Signup = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      maxWidth="s"
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        height: '100vh',
+        justifyContent: 'center',
+      }}
+    >
       <CssBaseline />
       <Box
         sx={{
           padding: 10,
-          marginTop: 8,
+          marginTop: 'auto',
+          margin: 'auto',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
           bgcolor: '#ffffff',
-          width: '550px',
+          width: '30vw',
           borderRadius: 3,
         }}
       >
@@ -148,7 +158,7 @@ const Signup = () => {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="/login" variant="body2">
+              <Link href="/" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
