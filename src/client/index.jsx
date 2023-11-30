@@ -13,18 +13,21 @@ import Main from './pages/MainPage.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import ClusterView from './components/ClusterView/ClusterView.jsx';
+import MainPage from './pages/MainPage.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <ThemeProvider theme={dashboardTheme}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="home" element={<HomePage />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="cluster-view" element={<ClusterView />} />
-          <Route path="alerts" element={<Alerts />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route path="main-page" element={<MainPage />}>
+            <Route path="home" element={<HomePage />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="cluster-view" element={<ClusterView />} />
+            <Route path="alerts" element={<Alerts />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

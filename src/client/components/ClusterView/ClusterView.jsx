@@ -5,6 +5,28 @@ import nodeImg from '../../../assets/node.png';
 import podImg from '../../../assets/pod.png';
 import svcImg from '../../../assets/svc.png';
 import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+
+let initialOptions = {
+  layout: {
+    hierarchical: true,
+    // randomSeed: '0.88888888888888888:8888888888888',
+  },
+  edges: {
+    color: '#4682b4',
+  },
+  height: '800px',
+  interaction: {
+    // zoomView: false, // disable zooming initially
+    hover: true,
+  },
+  configure: {
+    enabled: false,
+  },
+  physics: {
+    enabled: true,
+  },
+};
 
 const ClusterView = () => {
   // Declare state variables
@@ -16,6 +38,27 @@ const ClusterView = () => {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipContent, setTooltipContent] = useState('');
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [graphOptions, setGraphOptions] = useState(initialOptions);
+  const [graphKey, setGraphKey] = useState(0);
+
+  console.log('graphOptions', graphOptions);
+
+  useEffect(() => {
+    // Update the key to force re-render
+    setGraphKey((prevKey) => prevKey + 1);
+  }, [graphOptions]);
+
+  const changeGraphOptions = () => {
+    setGraphOptions((prevOptions) => ({
+      ...prevOptions,
+      layout: prevOptions.layout.hierarchical
+        ? { randomSeed: '0.88888888888888888:8888888888888' }
+        : { hierarchical: true },
+    }));
+
+    // Toggle the graphKey to force re-render
+    setGraphKey((prevKey) => (prevKey === 0 ? 1 : 0));
+  };
 
   // Accept nodes, pods.name, services, deployments
   const processData = (clusterData) => {
@@ -141,33 +184,13 @@ const ClusterView = () => {
     fetchData();
   }, []);
 
-  const options = {
-    layout: {
-      // hierarchical: true,
-      randomSeed: '0.88888888888888888:8888888888888',
-    },
-    edges: {
-      color: '#4682b4',
-    },
-    height: '800px',
-    interaction: {
-      // zoomView: false, // disable zooming initially
-      hover: true,
-    },
-    configure: {
-      enabled: false,
-    },
-    physics: {
-      enabled: true,
-    },
-  };
-
   // Event handling
   const handleNodeHover = (event) => {
     const {
       node,
       pointer: { DOM },
     } = event;
+
     let founded;
     if (node.length > 0) {
       clusterData.nodes.find((n) => {
@@ -197,7 +220,14 @@ const ClusterView = () => {
     <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
   ) : (
     <div>
-      <Graph graph={clusterData} options={options} events={events} />
+      <button onClick={changeGraphOptions}>Change Graph Style</button>
+
+      <Graph
+        key={graphKey}
+        graph={clusterData}
+        options={graphOptions}
+        events={events}
+      />
       {showTooltip && (
         <Tooltip title={tooltipContent} placement="top" arrow>
           <div
@@ -205,9 +235,18 @@ const ClusterView = () => {
               position: 'absolute',
               top: tooltipPosition.y,
               left: tooltipPosition.x,
+              maxWidth: '200px',
+              background: 'rgba(108, 122, 137, 0.9)',
+              padding: '8px',
+              borderRadius: '4px',
             }}
           >
-            {tooltipContent}
+            <Typography
+              variant="body1"
+              style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}
+            >
+              {tooltipContent}
+            </Typography>
           </div>
         </Tooltip>
       )}

@@ -28,6 +28,6 @@ router
   )
 
   // Logout user
-  .get('/logout', authController.logout);
+  .post('/logout', authController.logout);
 
 module.exports = router;
