@@ -22,9 +22,6 @@ const HomePage = () => {
   const [open, setOpen] = useState(false);
   const [clusters, setClusters] = useState([]);
 
-  // useLocation hook to get current location
-  // const location = useLocation();
-
   // Function to handle search bar functionality
   const getSearchBar = () => {
     // Function to handle user inputs
@@ -115,9 +112,6 @@ const HomePage = () => {
   return (
     <GridWrapper>
       <CommonCard header={getSearchBar()} content={getCluster()} />
-      <Link to={{ pathname: '/dashboard', state: { clusterData: clusters } }}>
-        Go to Dashboard
-      </Link>
       <NewClusterModal
         open={open}
         onClose={() => setOpen(false)}

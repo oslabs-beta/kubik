@@ -13,9 +13,12 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 // import Container from '@mui/material/Container';
+import { useAuth } from './AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  // Deconstruct 'login' from AuthContext
+  const { login } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -36,13 +39,18 @@ const Login = () => {
       // may need it to render username on the main dashboard
       const responseUsername = await response.json();
 
-      if (!response.ok) {
+      if (response.ok) {
         // need logic for failed auth
-        console.error('Login Failed:');
+        // console.error('Login Failed:');
+        // Update authentication state
+        login();
+        // Redirect to main page
+        navigate('/main-page');
       } else {
         // reroute to mainpage
         // Branden might need to change this
-        navigate('/');
+        // navigate('/');
+        console.error('Login failed:');
       }
     } catch (error) {
       // need error handler

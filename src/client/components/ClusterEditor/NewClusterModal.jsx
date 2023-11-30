@@ -65,9 +65,34 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
     resolver: yupResolver(validationSchema),
   });
 
+  // 'createCluster' - makes a POST request to db
+  const createCluster = async (data) => {
+    try {
+      if (data.clusterUrl && data.clusterName && data.clusterPort) {
+        const joinedUrl = data.clusterUrl + ':' + data.clusterPort;
+        const clusterObj = {
+          clusterName: data.clusterName,
+          clusterUrl: joinedUrl,
+        };
+        const response = await fetch('http://localhost:3020/api/cluster/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(clusterObj),
+          credentials: 'include',
+        });
+        const result = await response.json();
+      }
+    } catch (err) {
+      console.log(err, 'Cluster POST request unsuccessful');
+    }
+  };
+
   // 'addUser' - handles opening Modal
-  const addUser = (data) => {
-    // console.log(data);
+  const addCluster = (data) => {
+    console.log(data);
+    createCluster(data);
     addNewCluster(data);
   };
 
@@ -87,7 +112,7 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
     return (
       <Box sx={modalStyles.inputFields}>
         <TextField
-          placeholder="Enter Cluster URL"
+          placeholder="Enter Cluster URL and Port"
           name="clusterUrl"
           label="Cluster URL"
           required
@@ -136,7 +161,7 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
       title="New Cluster"
       subTitle='Fill out inputs and hit "submit" button.'
       content={getContent()}
-      onSubmit={handleSubmit(addUser)}
+      onSubmit={handleSubmit(addCluster)}
     />
   );
 };
