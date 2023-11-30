@@ -4,7 +4,6 @@ import deployImg from '../../assets/deploy.png';
 import nodeImg from '../../assets/node.png';
 import podImg from '../../assets/pod.png';
 import svcImg from '../../assets/svc.png';
-import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 let initialOptions = {
@@ -40,8 +39,6 @@ const ClusterView = () => {
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [graphOptions, setGraphOptions] = useState(initialOptions);
   const [graphKey, setGraphKey] = useState(0);
-
-  console.log('graphOptions', graphOptions);
 
   useEffect(() => {
     // Update the key to force re-render
@@ -229,6 +226,11 @@ const ClusterView = () => {
           margin: '10px',
           zIndex: 1,
           borderRadius: '4px',
+          background: 'rgba(108, 122, 137, 0.8)',
+          padding: '8px',
+          color: 'white',
+          border: 'none',
+          cursor: 'pointer',
         }}
       >
         Switch Graph Type
@@ -241,26 +243,27 @@ const ClusterView = () => {
         events={events}
       />
       {showTooltip && (
-        <Tooltip title={tooltipContent} placement="top" arrow>
-          <div
+        <div
+          style={{
+            position: 'absolute',
+            top: tooltipPosition.y,
+            left: tooltipPosition.x,
+            maxWidth: '200px',
+            background: 'rgba(108, 122, 137, 0.9)',
+            padding: '8px',
+            borderRadius: '4px',
+          }}
+        >
+          <Typography
             style={{
-              position: 'absolute',
-              top: tooltipPosition.y,
-              left: tooltipPosition.x,
-              maxWidth: '200px',
-              background: 'rgba(108, 122, 137, 0.9)',
-              padding: '8px',
-              borderRadius: '4px',
+              fontFamily: 'Roboto, sans-serif',
+              color: 'white',
+              fontSize: '13px',
             }}
           >
-            <Typography
-              variant="body1"
-              style={{ fontFamily: 'Roboto, sans-serif', color: 'white' }}
-            >
-              {tooltipContent}
-            </Typography>
-          </div>
-        </Tooltip>
+            {tooltipContent}
+          </Typography>
+        </div>
       )}
     </div>
   );
