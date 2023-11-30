@@ -31,12 +31,6 @@ export const mainNavbarItems = [
     label: 'Alerts',
     route: '/main-page/alerts',
   },
-  {
-    id: 4,
-    icon: <AssignmentIcon />,
-    label: 'Login',
-    route: '/main-page/login',
-  },
   // {
   //   id: 5,
   //   icon: <SettingsEthernetIcon />,

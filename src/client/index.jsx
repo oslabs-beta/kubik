@@ -31,7 +31,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="cluster-view" element={<ClusterView />} />
               <Route path="alerts" element={<Alerts />} />
-              <Route path="login" element={<Login />} />
             </Route>
           </Routes>
         </UserProvider>

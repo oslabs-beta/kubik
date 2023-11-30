@@ -9,14 +9,12 @@ import Typography from '@mui/material/Typography';
 let initialOptions = {
   layout: {
     hierarchical: true,
-    // randomSeed: '0.88888888888888888:8888888888888',
   },
   edges: {
     color: '#4682b4',
   },
   height: '800px',
   interaction: {
-    // zoomView: false, // disable zooming initially
     hover: true,
   },
   configure: {
