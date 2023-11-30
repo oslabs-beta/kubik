@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from 'react';
-// import Grid from '@mui/material/Grid';
-import Panel from '../components/Panel/Panel';
+// import Panel from '../components/Panel/Panel';
 import GridWrapper from '../components/common/GridWrapper/GridWrapper';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import CommonCard from '../components/common/CommonCard/CommonCard';
 import SearchBar from '../components/common/SearchBar/SearchBar';
 import CommonButton from '../components/common/CommonButton/CommonButton';
 import { IconButton } from '@mui/material';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { v4 as uuidv4 } from 'uuid';
-
-// const Item = styled('div')(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#262B32' : '#fff',
-//   padding: theme.spacing(1),
-//   textAlign: 'center',
-//   borderRadius: 4,
-// }));
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',

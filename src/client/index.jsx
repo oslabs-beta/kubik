@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -13,7 +12,6 @@ import MainPage from './pages/MainPage.jsx';
 import Login from './pages/Login.jsx';
 import Signup from './pages/Signup.jsx';
 import ClusterView from './pages/ClusterView.jsx';
-// import MainPage from './pages/MainPage.jsx';
 import { AuthProvider } from './pages/AuthContext.jsx';
 import { UserProvider } from './pages/UserContext.jsx';
 
@@ -38,9 +36,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </ThemeProvider>
 );
-
-// <ThemeProvider theme={dashboardTheme}>
-//   <BrowserRouter>
-//     <App />
-//   </BrowserRouter>
-// </ThemeProvider>

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useLocation, Link } from 'react-router-dom'; // Import useLocation
-import Grid from '@mui/material/Grid';
+// import { useLocation, Link } from 'react-router-dom'; // Import useLocation
+// import Grid from '@mui/material/Grid';
 // import Card from '@mui/material/Card';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
+// import Button from '@mui/material/Button';
+// import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import CommonCard from '../components/common/CommonCard/CommonCard';
 import SearchBar from '../components/common/SearchBar/SearchBar';
@@ -15,12 +15,26 @@ import GridWrapper from '../components/common/GridWrapper/GridWrapper';
 // import CommonModal from '../components/common/CommonModal/CommonModal';
 import NewClusterModal from '../components/ClusterEditor/NewClusterModal';
 import { v4 as uuidv4 } from 'uuid';
+import BasicSnackbar from '../components/common/BasicSnackbar/BasicSnackbar';
 
 // Add Cluster functionality on this page
 const HomePage = () => {
   // State for showing Cluster modal
   const [open, setOpen] = useState(false);
   const [clusters, setClusters] = useState([]);
+  const [openSnack, setOpenSnack] = useState(false);
+
+  // Functionality for Snackbar
+  const handleClick = () => {
+    setOpenSnack(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
 
   // Function to handle search bar functionality
   const getSearchBar = () => {
@@ -81,6 +95,9 @@ const HomePage = () => {
   const addNewCluster = (data) => {
     clusters.push({ ...data });
     setOpen(false);
+
+    // Invoke Snackbar
+    setOpenSnack(true);
   };
 
   // Function to get available Clusters
@@ -116,6 +133,12 @@ const HomePage = () => {
         open={open}
         onClose={() => setOpen(false)}
         addNewCluster={addNewCluster}
+      />
+      <BasicSnackbar
+        open={openSnack}
+        onClose={handleClose}
+        severity="success"
+        message="Successfully added a Cluster"
       />
     </GridWrapper>
   );
