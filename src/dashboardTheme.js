@@ -34,9 +34,16 @@ export const dashboardTheme = createTheme({
     },
   },
   palette: {
-    white: {
-      main: '#fff',
-    },
+    main: '#5193B3',
+  },
+  secondary: {
+    main: '#F8D49B',
+  },
+  error: {
+    main: '#F44336',
+  },
+  info: {
+    main: '#62C4C3',
   },
   typography: {
     h1: {
