@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@emotion/react';
-import { dashboardTheme } from '../dashboardTheme.js';
+// import { dashboardTheme } from '../dashboardTheme.js';
 import App from './App.jsx';
 import HomePage from './pages/HomePage.jsx';
 import Dashboard from './pages/Dashboard.jsx';
@@ -14,9 +14,12 @@ import Signup from './pages/Signup.jsx';
 import ClusterView from './pages/ClusterView.jsx';
 import { AuthProvider } from './pages/AuthContext.jsx';
 import { UserProvider } from './pages/UserContext.jsx';
+import { createTheme } from '../theme/index.js';
+
+const theme = createTheme;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <ThemeProvider theme={dashboardTheme}>
+  <ThemeProvider theme={theme}>
     <BrowserRouter>
       <AuthProvider>
         <UserProvider>
