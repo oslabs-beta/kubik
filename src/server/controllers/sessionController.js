@@ -12,8 +12,8 @@ const sessionController = {
   addSession: (req, res, next) => {
     if (res.locals.user && res.locals.user._id) {
       req.session.userId = res.locals.user._id;
-      console.log(req.session);
-      next();
+
+      return next();
     } else {
       res
         .status(400)

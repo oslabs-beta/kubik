@@ -13,12 +13,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { useAuth } from './AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  // Deconstruct 'login' from AuthContext
-  const { login } = useAuth();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -40,7 +38,6 @@ const Login = () => {
       const responseUsername = await response.json();
 
       if (response.ok) {
-        login();
         // Redirect to main page
         navigate('/main-page');
       } else {
