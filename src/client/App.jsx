@@ -1,32 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 // import Header from './components/Header/Header.jsx';
-// import { DndProvider } from 'react-dnd';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
-// import { Route, Routes, useNavigate } from 'react-router-dom';
-import { useAuth } from './pages/AuthContext.jsx';
-import { useUser } from './pages/UserContext.jsx';
 
 if (typeof global === 'undefined') {
   window.global = window;
 }
 
 const App = () => {
-  const { isLoggedIn } = useAuth();
-  const { userId, setUserId } = useUser();
+  const navigate = useNavigate();
+  // const [loggedIn, setLoggedIn] = useState(false);
+  // const [username, setUsername] = useState('');
 
-  if (!isLoggedIn) {
-    // Redirect to login if not logged in
-    return <Navigate to="/" replace />;
-  }
+  const checkSession = async () => {
+    try {
+      const response = await fetch('http://localhost:3020/', {
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error checking session', error);
+    }
+  };
+
+  useEffect(() => {
+    checkSession();
+  }, []);
+
+  // if (!loggedIn) {
+  //   return <Navigate href="/" replace />;
+  // }
 
   return (
     <Grid container>
       <Navbar />
-      {/* <Header title={title} /> */}
-      <Outlet context={{ userId, setUserId }} />
+      {/* <Header title={title} /> Uncomment if Header is needed */}
+      <Outlet context={{}} />
     </Grid>
   );
 };
