@@ -13,7 +13,6 @@ let initialOptions = {
   edges: {
     color: '#4682b4',
   },
-  height: '800px',
   interaction: {
     hover: true,
   },
@@ -212,7 +211,7 @@ const ClusterView = () => {
   };
 
   return isLoading ? (
-    <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
+    <div>Loading Kubernetes Cluster...</div>
   ) : (
     <div>
       {/* Content */}
@@ -224,8 +223,7 @@ const ClusterView = () => {
             top: 0,
             right: 0,
             margin: '10px',
-            marginTop: '15px',
-            marginRight: '-90px',
+            marginTop: '12px',
             zIndex: 1,
             borderRadius: '4px',
             background: 'rgba(108, 122, 137, 0.8)',
@@ -243,6 +241,7 @@ const ClusterView = () => {
           graph={clusterData}
           options={graphOptions}
           events={events}
+          style={{ width: '100%', height: '100vh' }}
         />
         {showTooltip && (
           <div
