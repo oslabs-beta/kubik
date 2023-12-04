@@ -9,7 +9,7 @@ const chartController = {
 
     Object.values(metrics).forEach((metric) => {
       metric.panelId.forEach((id) => {
-        const url = `${clusterUrl}/d-solo/${metric.uid}?panelId=${id}`;
+        const url = `${clusterUrl}/d-solo/${metric.uid}?panelId=${id}&refresh=30s`;
         chartUrls.push(url);
       });
     });
