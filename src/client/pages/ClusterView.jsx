@@ -4,6 +4,7 @@ import deployImg from '../../assets/deploy.png';
 import nodeImg from '../../assets/node.png';
 import podImg from '../../assets/pod.png';
 import svcImg from '../../assets/svc.png';
+import ns from '../../assets/ns.png';
 import Typography from '@mui/material/Typography';
 
 let initialOptions = {
@@ -13,7 +14,6 @@ let initialOptions = {
   edges: {
     color: '#4682b4',
   },
-  height: '800px',
   interaction: {
     hover: true,
   },
@@ -60,6 +60,22 @@ const ClusterView = () => {
     const nodes = [];
     const edges = [];
 
+    // Populate nodes for namespaces array
+    clusterData.namespaces.forEach((namespace, idx) => {
+      nodes.push({
+        id: `namespace-${idx}`,
+        // label: `Namespace: ${namespace}`,
+        label: '',
+        title: `Namespace: ${namespace}`,
+        image: ns,
+        shape: 'image',
+        size: 35,
+        Tooltip: {
+          content: `<b>Namespace:</b> ${namespace}`,
+        },
+      });
+    });
+
     // Populate nodes for nodes array
     clusterData.nodes.forEach((node, idx) => {
       nodes.push({
@@ -69,6 +85,7 @@ const ClusterView = () => {
         title: `Node: ${node}`,
         image: nodeImg,
         shape: 'image',
+        size: 30,
         Tooltip: {
           content: `<b>Node:</b> ${node}`,
         },
@@ -84,18 +101,30 @@ const ClusterView = () => {
         title: `Pod: ${pod.name}`,
         image: podImg,
         shape: 'image',
+        size: 30,
         Tooltip: {
           content: `<b>Pod:</b> ${pod}`,
         },
       });
 
-      // Populate pods/nodes relationship in edge array
+      // Populate pod relationships in edge array
       const nodeIdx = clusterData.nodes.indexOf(pod.nodeName);
-      if (nodeIdx !== -1) {
+      const nsIdx = clusterData.namespaces.indexOf(pod.namespaceName);
+
+      if (nodeIdx !== -1 && nsIdx !== -1) {
+        // Pods and nodes
         edges.push({
           from: `node-${nodeIdx}`,
           to: `pod-${idx}`,
-          length: 250, // custom length
+          length: 250,
+          arrows: 'to',
+        });
+
+        // Nodes and namespaces (based on pod data)
+        edges.push({
+          from: `namespace-${nsIdx}`,
+          to: `node-${nodeIdx}`,
+          length: 250,
           arrows: 'to',
         });
       }
@@ -110,6 +139,7 @@ const ClusterView = () => {
         title: `Service: ${service}`,
         image: svcImg,
         shape: 'image',
+        size: 30,
         Tooltip: {
           content: `<b>Service:</b> ${service}`,
         },
@@ -140,6 +170,7 @@ const ClusterView = () => {
         title: `Deployment: ${deployment}`,
         image: deployImg,
         shape: 'image',
+        size: 30,
         Tooltip: {
           content: `<b>Deployment:</b> ${deployment}`,
         },
@@ -212,7 +243,7 @@ const ClusterView = () => {
   };
 
   return isLoading ? (
-    <div style={{ height: '100%' }}>Loading Kubernetes Cluster...</div>
+    <div>Loading Kubernetes Cluster...</div>
   ) : (
     <div>
       {/* Content */}
@@ -224,8 +255,7 @@ const ClusterView = () => {
             top: 0,
             right: 0,
             margin: '10px',
-            marginTop: '15px',
-            marginRight: '-90px',
+            marginTop: '12px',
             zIndex: 1,
             borderRadius: '4px',
             background: 'rgba(108, 122, 137, 0.8)',
@@ -243,6 +273,7 @@ const ClusterView = () => {
           graph={clusterData}
           options={graphOptions}
           events={events}
+          style={{ width: '100%', height: '100vh' }}
         />
         {showTooltip && (
           <div
