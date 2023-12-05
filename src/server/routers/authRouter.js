@@ -1,4 +1,5 @@
 const express = require('express');
+const passport = require('../config/passport');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const bcryptController = require('../controllers/bcryptController');
@@ -28,6 +29,25 @@ router
   )
 
   // Logout user
-  .post('/logout', authController.logout);
+  .post('/logout', authController.logout)
+
+  // Google OAuth Routes
+  .get(
+    '/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+  )
+
+  .get(
+    '/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    async (req, res, next) => {
+      res.locals.user = req.user;
+      return next();
+    },
+    sessionController.addSession,
+    (req, res) => {
+      res.redirect('http://localhost:4444/main-page/');
+    }
+  );
 
 module.exports = router;
