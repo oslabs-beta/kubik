@@ -4,6 +4,7 @@ const connectDB = require('./config/db');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const passport = require('./config/passport');
 const router = require('./routers/router');
 require('dotenv').config();
 
@@ -42,6 +43,10 @@ app.use(
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Google OAuth
+app.use(passport.initialize());
+app.use(passport.session());
 
 // check session
 app.get('/', require('./controllers/sessionController').checkSession);
