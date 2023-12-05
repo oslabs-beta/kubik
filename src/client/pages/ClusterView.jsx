@@ -4,6 +4,7 @@ import deployImg from '../../assets/deploy.png';
 import nodeImg from '../../assets/node.png';
 import podImg from '../../assets/pod.png';
 import svcImg from '../../assets/svc.png';
+import logo from '../../assets/kubik-logo.png';
 import ns from '../../assets/ns.png';
 import Typography from '@mui/material/Typography';
 
@@ -38,10 +39,13 @@ const ClusterView = () => {
   const [graphOptions, setGraphOptions] = useState(initialOptions);
   const [graphKey, setGraphKey] = useState(0);
 
+  // Event listener for window resize
   useEffect(() => {
-    // Update the key to force re-render
-    setGraphKey((prevKey) => prevKey + 1);
-  }, [graphOptions]);
+    const handleResize = () => {
+      setGraphKey((prevKey) => prevKey + 1);
+    };
+    window.addEventListener('resize', handleResize);
+  }, []);
 
   const changeGraphOptions = () => {
     setGraphOptions((prevOptions) => ({
@@ -60,21 +64,34 @@ const ClusterView = () => {
     const nodes = [];
     const edges = [];
 
+    const logoNode = {
+      id: 'logo',
+      label: '',
+      title: 'Kubik',
+      image: logo,
+      shape: 'image',
+      size: 45,
+      Tooltip: {
+        content: '<b>Kubik</b>',
+      },
+    };
+    // nodes.push(logoNode);
+
     // Populate nodes for namespaces array
-    clusterData.namespaces.forEach((namespace, idx) => {
-      nodes.push({
-        id: `namespace-${idx}`,
-        // label: `Namespace: ${namespace}`,
-        label: '',
-        title: `Namespace: ${namespace}`,
-        image: ns,
-        shape: 'image',
-        size: 35,
-        Tooltip: {
-          content: `<b>Namespace:</b> ${namespace}`,
-        },
-      });
-    });
+    // clusterData.namespaces.forEach((namespace, idx) => {
+    //   nodes.push({
+    //     id: `namespace-${idx}`,
+    //     // label: `Namespace: ${namespace}`,
+    //     label: '',
+    //     title: `Namespace: ${namespace}`,
+    //     image: ns,
+    //     shape: 'image',
+    //     size: 35,
+    //     Tooltip: {
+    //       content: `<b>Namespace:</b> ${namespace}`,
+    //     },
+    //   });
+    // });
 
     // Populate nodes for nodes array
     clusterData.nodes.forEach((node, idx) => {
@@ -90,6 +107,16 @@ const ClusterView = () => {
           content: `<b>Node:</b> ${node}`,
         },
       });
+
+      // Edges from logo to nodes
+      // if (node.id !== 'logo') {
+      //   edges.push({
+      //     from: 'logo',
+      //     to: `node-${idx}`,
+      //     length: 700,
+      //     arrows: 'to',
+      //   });
+      // }
     });
 
     // Populate pods for nodes array
@@ -111,19 +138,19 @@ const ClusterView = () => {
       const nodeIdx = clusterData.nodes.indexOf(pod.nodeName);
       const nsIdx = clusterData.namespaces.indexOf(pod.namespaceName);
 
-      if (nodeIdx !== -1 && nsIdx !== -1) {
-        // Pods and nodes
+      // // Nodes and namespaces (based on pod data)
+      if (nsIdx !== -1 && nodeIdx !== -1) {
         edges.push({
-          from: `node-${nodeIdx}`,
-          to: `pod-${idx}`,
+          from: `namespace-${nsIdx}`,
+          to: `node-${nodeIdx}`,
           length: 250,
           arrows: 'to',
         });
 
-        // Nodes and namespaces (based on pod data)
+        // Pods and nodes
         edges.push({
-          from: `namespace-${nsIdx}`,
-          to: `node-${nodeIdx}`,
+          from: `node-${nodeIdx}`,
+          to: `pod-${idx}`,
           length: 250,
           arrows: 'to',
         });

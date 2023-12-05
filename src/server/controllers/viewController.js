@@ -28,7 +28,6 @@ const viewController = {
         },
         {}
       );
-      // console.log(' 🌟🚀😎🌈🎉🌺🍕🎸📚🚗💡', pods.body.items);
 
       // Map corresponding pods and services
       const svcPodRelation = services.body.items.reduce(
