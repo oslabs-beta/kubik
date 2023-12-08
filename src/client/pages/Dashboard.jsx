@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [podsArr, setPodsArr] = useState([]);
   const [svcArr, setSvcArr] = useState([]);
   const [deployArr, setDeployArr] = useState([]);
-  const [nodesData, setNodesData] = useState([]);
+  const [nodesData, setNodesData] = useState({});
 
   const getCluster = async () => {
     try {
@@ -44,6 +44,7 @@ const Dashboard = () => {
       const nodesData = await getClusterData();
       setNodesArr(nodes);
       setNodesData(nodesData);
+      console.log('nodesData', nodesData);
     };
 
     fetchNodes();
@@ -71,18 +72,18 @@ const Dashboard = () => {
       <Grid container spacing={0.5} style={{ width: '100%' }}>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'NODES', value: nodesData.nodes.length || 0 }]}
+            items={[{ header: 'NODES', value: nodesData?.nodes?.length || 0 }]}
           />
         </Grid>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'PODS', value: nodesData.pods.length || 0 }]}
+            items={[{ header: 'PODS', value: nodesData?.pods?.length || 0 }]}
           />
         </Grid>
         <Grid item xs={3}>
           <BannerComponent
             items={[
-              { header: 'SERVICES', value: nodesData.services.length || 0 },
+              { header: 'SERVICES', value: nodesData?.services?.length || 0 },
             ]}
           />
         </Grid>
@@ -91,7 +92,7 @@ const Dashboard = () => {
             items={[
               {
                 header: 'DEPLOYMENTS',
-                value: nodesData.deployments.length || 0,
+                value: nodesData?.deployments?.length || 0,
               },
             ]}
           />
