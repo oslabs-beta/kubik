@@ -70,8 +70,6 @@ const viewController = {
         ),
       };
 
-      console.log(pods.body.items[0]);
-
       return next();
     } catch (error) {
       return next(error);

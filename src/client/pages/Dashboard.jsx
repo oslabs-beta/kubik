@@ -7,10 +7,10 @@ import Grid from '@mui/material/Grid';
 
 const Dashboard = () => {
   const [nodesArr, setNodesArr] = useState([]);
-  // Add similar state variables for pods, services, and deployments if needed
   const [podsArr, setPodsArr] = useState([]);
   const [svcArr, setSvcArr] = useState([]);
   const [deployArr, setDeployArr] = useState([]);
+  const [nodesData, setNodesData] = useState([]);
 
   const getCluster = async () => {
     try {
@@ -25,10 +25,25 @@ const Dashboard = () => {
     }
   };
 
+  const getClusterData = async () => {
+    try {
+      const response = await fetch('http://localhost:3020/api/view/get', {
+        credentials: 'include',
+      });
+      const result = await response.json();
+      console.log(result);
+      return result;
+    } catch (err) {
+      console.log(err, 'Cluster data request unsuccessful');
+    }
+  };
+
   useEffect(() => {
     const fetchNodes = async () => {
       const nodes = await getCluster();
+      const nodesData = await getClusterData();
       setNodesArr(nodes);
+      setNodesData(nodesData);
     };
 
     fetchNodes();
@@ -56,22 +71,29 @@ const Dashboard = () => {
       <Grid container spacing={0.5} style={{ width: '100%' }}>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'NODES', value: nodesArr.length }]}
+            items={[{ header: 'NODES', value: nodesData.nodes.length || 0 }]}
           />
         </Grid>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'PODS', value: podsArr.length }]}
+            items={[{ header: 'PODS', value: nodesData.pods.length || 0 }]}
           />
         </Grid>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'SERVICES', value: svcArr.length }]}
+            items={[
+              { header: 'SERVICES', value: nodesData.services.length || 0 },
+            ]}
           />
         </Grid>
         <Grid item xs={3}>
           <BannerComponent
-            items={[{ header: 'DEPLOYMENTS', value: deployArr.length }]}
+            items={[
+              {
+                header: 'DEPLOYMENTS',
+                value: nodesData.deployments.length || 0,
+              },
+            ]}
           />
         </Grid>
       </Grid>
@@ -112,7 +134,7 @@ const Dashboard = () => {
         {/* Second row of iframes */}
         <Grid item xs={6}>
           <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763654014&to=1701850054014&panelId=3"
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?panelId=3"
             width="100%"
             height="300"
           ></iframe>

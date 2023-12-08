@@ -15,7 +15,7 @@ const Item = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  padding: '10px',
+  padding: '4px',
   background: '#171c20',
 }));
 
@@ -47,7 +47,7 @@ const BannerComponent = (props) => {
   return (
     <Banner style={width ? { width } : {}} className="iframesRow">
       <Grid container spacing={0.5} style={{ height: '100%', width: '100%' }}>
-        {items.map((item, index) => (
+        {items.map((item) => (
           <Grid item key={item.header} xs={3} sm={6} md={3}>
             <Item>
               <ItemHeading>{item.header}</ItemHeading>
