@@ -1,38 +1,27 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import PropTypes from 'prop-types';
+import Grid from '@mui/material/Grid';
 
 const Banner = styled('div')(({ theme }) => ({
-  background: theme.palette.primary.main,
   height: 124,
   width: '100vw',
   borderRadius: 4,
-  border: `1px solid ${theme.palette.divider}`,
   display: 'flex',
   justifyContent: 'space-around',
-  //   '& .iframesRow': {
-  //     display: 'flex',
-  //     justifyContent: 'space-between',
-  //     alignItems: 'center',
-  //   },
 }));
 
-const Items = styled('div')(({ theme }) => ({
+const Item = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '100%',
-  borderRight: `1px solid ${theme.palette.divider}`,
+  padding: '10px',
   background: '#171c20',
 }));
 
-const LastItem = styled('div')({
-  border: 'none',
-});
-
 const ItemHeading = styled('p')(({ theme }) => ({
-  fontFamily: 'Lato',
-  fontSize: 14,
+  fontFamily: 'Gill Sans',
+  fontSize: 18,
   fontWeight: 600,
   lineHeight: '17px',
   letterSpacing: 0.21666666865348816,
@@ -42,32 +31,31 @@ const ItemHeading = styled('p')(({ theme }) => ({
 }));
 
 const ItemValue = styled('p')(({ theme }) => ({
-  fontFamily: 'Lato',
-  fontSize: 36,
+  fontFamily: 'Gill Sans',
+  fontSize: 30,
   fontWeight: 500,
   lineHeight: '43px',
   letterSpacing: 0.21666666865348816,
   textAlign: 'center',
-  //   lineHeight: '15px',
-  color: theme.palette.text.primary,
+  color: theme.palette.text.secondary,
+  marginTop: -2,
 }));
 
 const BannerComponent = (props) => {
   const { items, width } = props;
 
-  const renderedItems = items.map((item, index) => (
-    <Items
-      key={item.header}
-      className={index === items.length - 1 ? LastItem : ''}
-    >
-      <ItemHeading>{item.header}</ItemHeading>
-      <ItemValue>{item.value}</ItemValue>
-    </Items>
-  ));
-
   return (
     <Banner style={width ? { width } : {}} className="iframesRow">
-      {renderedItems}
+      <Grid container spacing={0.5} style={{ height: '100%', width: '100%' }}>
+        {items.map((item, index) => (
+          <Grid item key={item.header} xs={3} sm={6} md={3}>
+            <Item>
+              <ItemHeading>{item.header}</ItemHeading>
+              <ItemValue>{item.value}</ItemValue>
+            </Item>
+          </Grid>
+        ))}
+      </Grid>
     </Banner>
   );
 };

@@ -3,6 +3,7 @@ import BannerComponent from '../components/Dashboard/Banner';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 const Dashboard = () => {
   const [nodesArr, setNodesArr] = useState([]);
@@ -38,8 +39,8 @@ const Dashboard = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'space-between',
         alignItems: 'center',
+        height: '80',
       }}
     >
       {/* Header section */}
@@ -52,84 +53,96 @@ const Dashboard = () => {
       </AppBar>
 
       {/* Banner section */}
-      <BannerComponent
-        items={[
-          { header: 'Nodes', value: nodesArr.length },
-          { header: 'Pods', value: podsArr.length },
-          { header: 'Services', value: svcArr.length },
-          { header: 'Deployments', value: deployArr.length },
-        ]}
-      />
+      <Grid container spacing={0.5} style={{ width: '100%' }}>
+        <Grid item xs={3}>
+          <BannerComponent
+            items={[{ header: 'NODES', value: nodesArr.length }]}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <BannerComponent
+            items={[{ header: 'PODS', value: podsArr.length }]}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <BannerComponent
+            items={[{ header: 'SERVICES', value: svcArr.length }]}
+          />
+        </Grid>
+        <Grid item xs={3}>
+          <BannerComponent
+            items={[{ header: 'DEPLOYMENTS', value: deployArr.length }]}
+          />
+        </Grid>
+      </Grid>
 
-      {/* First row of iframes */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          // width: '90%',
-        }}
-      >
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701758867566&to=1701845267566&panelId=20"
-          width="385"
-          height="175"
-        ></iframe>
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761410905&to=1701847810905&panelId=155"
-          width="385"
-          height="175"
-        ></iframe>
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761470945&to=1701847870945&panelId=16"
-          width="385"
-          height="175"
-        ></iframe>
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761489956&to=1701847889956&panelId=21"
-          width="385"
-          height="175"
-        ></iframe>
-      </div>
+      <Grid container spacing={0.5} style={{ width: '100%' }}>
+        {/* First row of iframes */}
+        <Grid item xs={3}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701758867566&to=1701845267566&panelId=20"
+            width="100%"
+            height="175"
+          ></iframe>
+        </Grid>
+        <Grid item xs={3}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761410905&to=1701847810905&panelId=155"
+            width="100%"
+            height="175"
+          ></iframe>
+        </Grid>
+        <Grid item xs={3}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761470945&to=1701847870945&panelId=16"
+            width="100%"
+            height="175"
+          ></iframe>
+        </Grid>
+        <Grid item xs={3}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761489956&to=1701847889956&panelId=21"
+            width="100%"
+            height="175"
+          ></iframe>
+        </Grid>
+      </Grid>
 
-      {/* Second row of iframes */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '90%',
-        }}
-      >
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763654014&to=1701850054014&panelId=3"
-          width="815"
-          height="300"
-        ></iframe>
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763672641&to=1701850072641&panelId=24"
-          width="815"
-          height="300"
-        ></iframe>
-      </div>
+      <Grid container spacing={0.5} style={{ width: '100%' }}>
+        {/* Second row of iframes */}
+        <Grid item xs={6}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763654014&to=1701850054014&panelId=3"
+            width="100%"
+            height="300"
+          ></iframe>
+        </Grid>
+        <Grid item xs={6}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763672641&to=1701850072641&panelId=24"
+            width="100%"
+            height="300"
+          ></iframe>
+        </Grid>
+      </Grid>
 
-      {/* Third row of iframes */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '90%',
-        }}
-      >
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761582861&to=1701847982861&panelId=84"
-          width="815"
-          height="300"
-        ></iframe>
-        <iframe
-          src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761600576&to=1701848000576&panelId=156"
-          width="815"
-          height="300"
-        ></iframe>
-      </div>
+      <Grid container spacing={0.5} style={{ width: '100%' }}>
+        {/* Third row of iframes */}
+        <Grid item xs={6}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761582861&to=1701847982861&panelId=84"
+            width="100%"
+            height="300"
+          ></iframe>
+        </Grid>
+        <Grid item xs={6}>
+          <iframe
+            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761600576&to=1701848000576&panelId=156"
+            width="100%"
+            height="300"
+          ></iframe>
+        </Grid>
+      </Grid>
     </div>
   );
 };
