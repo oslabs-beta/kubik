@@ -102,7 +102,7 @@ const ClusterView = () => {
         title: `Node: ${node}`,
         image: nodeImg,
         shape: 'image',
-        size: 30,
+        size: 45,
         Tooltip: {
           content: `<b>Node:</b> ${node}`,
         },
@@ -128,7 +128,7 @@ const ClusterView = () => {
         title: `Pod: ${pod.name}`,
         image: podImg,
         shape: 'image',
-        size: 30,
+        size: 35,
         Tooltip: {
           content: `<b>Pod:</b> ${pod}`,
         },
@@ -270,7 +270,7 @@ const ClusterView = () => {
   };
 
   return isLoading ? (
-    <div>Loading Kubernetes Cluster...</div>
+    <div style={{ marginTop: '50px' }}>Loading Kubernetes Cluster...</div>
   ) : (
     <div>
       {/* Content */}
@@ -309,7 +309,7 @@ const ClusterView = () => {
               top: tooltipPosition.y,
               left: tooltipPosition.x,
               maxWidth: '200px',
-              background: 'rgba(108, 122, 137, 0.9)',
+              background: 'rgba(23, 28, 31, 0.9)',
               padding: '8px',
               borderRadius: '4px',
             }}
@@ -319,6 +319,7 @@ const ClusterView = () => {
                 fontFamily: 'Roboto, sans-serif',
                 color: 'white',
                 fontSize: '13px',
+                textAlign: 'center',
               }}
             >
               {tooltipContent}
