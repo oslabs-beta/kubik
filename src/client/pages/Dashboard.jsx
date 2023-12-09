@@ -4,6 +4,8 @@ import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import MetricIframe from '../components/Dashboard/MetricIframe';
+import metrics from '../components/Dashboard/PanelIds';
 
 const Dashboard = () => {
   const [nodesArr, setNodesArr] = useState([]);
@@ -101,70 +103,41 @@ const Dashboard = () => {
 
       <Grid container spacing={0.5} style={{ width: '100%' }}>
         {/* First row of iframes */}
-        <Grid item xs={3}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701758867566&to=1701845267566&panelId=20"
-            width="100%"
-            height="175"
-          ></iframe>
-        </Grid>
-        <Grid item xs={3}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761410905&to=1701847810905&panelId=155"
-            width="100%"
-            height="175"
-          ></iframe>
-        </Grid>
-        <Grid item xs={3}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761470945&to=1701847870945&panelId=16"
-            width="100%"
-            height="175"
-          ></iframe>
-        </Grid>
-        <Grid item xs={3}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761489956&to=1701847889956&panelId=21"
-            width="100%"
-            height="175"
-          ></iframe>
-        </Grid>
+        {metrics.nodeExporter.panelId.slice(0, 4).map((id, index) => (
+          <Grid item xs={3} key={index}>
+            <MetricIframe
+              uid={metrics.nodeExporter.uid}
+              panelId={id}
+              heightVal={175}
+            />
+          </Grid>
+        ))}
       </Grid>
 
       <Grid container spacing={0.5} style={{ width: '100%' }}>
         {/* Second row of iframes */}
-        <Grid item xs={6}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?panelId=3"
-            width="100%"
-            height="300"
-          ></iframe>
-        </Grid>
-        <Grid item xs={6}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701763672641&to=1701850072641&panelId=24"
-            width="100%"
-            height="300"
-          ></iframe>
-        </Grid>
+        {metrics.nodeExporter.panelId.slice(4, 6).map((id, index) => (
+          <Grid item xs={6} key={index}>
+            <MetricIframe
+              uid={metrics.nodeExporter.uid}
+              panelId={id}
+              heightVal={300}
+            />
+          </Grid>
+        ))}
       </Grid>
 
       <Grid container spacing={0.5} style={{ width: '100%' }}>
         {/* Third row of iframes */}
-        <Grid item xs={6}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761582861&to=1701847982861&panelId=84"
-            width="100%"
-            height="300"
-          ></iframe>
-        </Grid>
-        <Grid item xs={6}>
-          <iframe
-            src="http://localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701761600576&to=1701848000576&panelId=156"
-            width="100%"
-            height="300"
-          ></iframe>
-        </Grid>
+        {metrics.nodeExporter.panelId.slice(6).map((id, index) => (
+          <Grid item xs={6} key={index}>
+            <MetricIframe
+              uid={metrics.nodeExporter.uid}
+              panelId={id}
+              heightVal={300}
+            />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
