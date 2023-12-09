@@ -52,6 +52,23 @@ const Dashboard = () => {
     fetchNodes();
   }, []);
 
+  const bannerItems = [
+    { key: 'nodes', header: 'NODES', dataKey: 'nodes', defaultValue: 0 },
+    { key: 'pods', header: 'PODS', dataKey: 'pods', defaultValue: 0 },
+    {
+      key: 'services',
+      header: 'SERVICES',
+      dataKey: 'services',
+      defaultValue: 0,
+    },
+    {
+      key: 'deployments',
+      header: 'DEPLOYMENTS',
+      dataKey: 'deployments',
+      defaultValue: 0,
+    },
+  ];
+
   return (
     <div
       style={{
@@ -59,6 +76,7 @@ const Dashboard = () => {
         flexDirection: 'column',
         alignItems: 'center',
         height: '80',
+        width: '100vw',
       }}
     >
       {/* Header section */}
@@ -69,76 +87,73 @@ const Dashboard = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-
-      {/* Banner section */}
-      <Grid container spacing={0.5} style={{ width: '100%' }}>
-        <Grid item xs={3}>
-          <BannerComponent
-            items={[{ header: 'NODES', value: nodesData?.nodes?.length || 0 }]}
-          />
+      <div
+        style={{
+          marginTop: '60px',
+          marginLeft: '260px',
+          width: '81vw',
+        }}
+      >
+        {/* Banner section */}
+        <Grid
+          container
+          spacing={0.5}
+          style={{ height: '150px', width: '100%' }}
+        >
+          {bannerItems.map((item) => (
+            <Grid item xs={3} key={item.key}>
+              <BannerComponent
+                items={[
+                  {
+                    header: item.header,
+                    value: nodesData[item.dataKey]?.length || item.defaultValue,
+                  },
+                ]}
+              />
+            </Grid>
+          ))}
         </Grid>
-        <Grid item xs={3}>
-          <BannerComponent
-            items={[{ header: 'PODS', value: nodesData?.pods?.length || 0 }]}
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <BannerComponent
-            items={[
-              { header: 'SERVICES', value: nodesData?.services?.length || 0 },
-            ]}
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <BannerComponent
-            items={[
-              {
-                header: 'DEPLOYMENTS',
-                value: nodesData?.deployments?.length || 0,
-              },
-            ]}
-          />
-        </Grid>
-      </Grid>
 
-      <Grid container spacing={0.5} style={{ width: '100%' }}>
-        {/* First row of iframes */}
-        {metrics.nodeExporter.panelId.slice(0, 4).map((id, index) => (
-          <Grid item xs={3} key={index}>
-            <MetricIframe
-              uid={metrics.nodeExporter.uid}
-              panelId={id}
-              heightVal={175}
-            />
-          </Grid>
-        ))}
-      </Grid>
+        {/* Iframe sections */}
+        <Grid container spacing={0.5} style={{ width: '100%' }}>
+          {/* First row of iframes */}
+          {metrics.nodeExporter.panelId.slice(0, 4).map((id, index) => (
+            <Grid item xs={3} key={index}>
+              <MetricIframe
+                uid={metrics.nodeExporter.uid}
+                panelId={id}
+                heightVal={175}
+              />
+            </Grid>
+          ))}
+        </Grid>
 
-      <Grid container spacing={0.5} style={{ width: '100%' }}>
-        {/* Second row of iframes */}
-        {metrics.nodeExporter.panelId.slice(4, 6).map((id, index) => (
-          <Grid item xs={6} key={index}>
-            <MetricIframe
-              uid={metrics.nodeExporter.uid}
-              panelId={id}
-              heightVal={300}
-            />
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container spacing={0.5} style={{ width: '100%' }}>
+          {/* Second row of iframes */}
+          {metrics.nodeExporter.panelId.slice(4, 6).map((id, index) => (
+            <Grid item xs={6} key={index}>
+              <MetricIframe
+                uid={metrics.nodeExporter.uid}
+                panelId={id}
+                heightVal={300}
+              />
+            </Grid>
+          ))}
+        </Grid>
 
-      <Grid container spacing={0.5} style={{ width: '100%' }}>
-        {/* Third row of iframes */}
-        {metrics.nodeExporter.panelId.slice(6).map((id, index) => (
-          <Grid item xs={6} key={index}>
-            <MetricIframe
-              uid={metrics.nodeExporter.uid}
-              panelId={id}
-              heightVal={300}
-            />
-          </Grid>
-        ))}
-      </Grid>
+        <Grid container spacing={0.5} style={{ width: '100%' }}>
+          {/* Third row of iframes */}
+          {metrics.nodeExporter.panelId.slice(6).map((id, index) => (
+            <Grid item xs={6} key={index}>
+              <MetricIframe
+                uid={metrics.nodeExporter.uid}
+                panelId={id}
+                heightVal={300}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
     </div>
   );
 };

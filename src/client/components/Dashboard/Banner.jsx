@@ -45,11 +45,11 @@ const BannerComponent = (props) => {
   const { items, width } = props;
 
   return (
-    <Banner style={width ? { width } : {}} className="iframesRow">
-      <Grid container spacing={0.5} style={{ height: '100%', width: '100%' }}>
+    <Banner style={{ width: '197px' }}>
+      <Grid container spacing={0.5} style={{ height: '100%' }}>
         {items.map((item) => (
           <Grid item key={item.header} xs={3} sm={6} md={3}>
-            <Item>
+            <Item style={{ width: '19.75vw' }}>
               <ItemHeading>{item.header}</ItemHeading>
               <ItemValue>{item.value}</ItemValue>
             </Item>

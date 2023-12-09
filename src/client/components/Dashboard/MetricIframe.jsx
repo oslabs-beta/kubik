@@ -13,5 +13,3 @@ const MetricIframe = ({ uid, panelId, heightVal }) => {
 };
 
 export default MetricIframe;
-
-// http:localhost:3000/d-solo/rYdddlPWk/node-exporter-full?orgId=1&from=1701758867566&to=1701845267566&panelId=20

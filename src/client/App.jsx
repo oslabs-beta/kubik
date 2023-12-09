@@ -37,7 +37,7 @@ const App = () => {
 
   return (
     <Grid container>
-      {/* <Navbar /> */}
+      <Navbar />
       {/* <Header title={title} /> Uncomment if Header is needed */}
       <Outlet context={{}} />
     </Grid>
