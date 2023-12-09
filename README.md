@@ -24,7 +24,7 @@ View important metrics and graphs to monitor cluster health.
 ---GIF GOES HERE---CHANGE GRAPH TYPES
 
 ## Setup
-1. Create an example yaml file named "webapp-deploymment.yaml" to use a simple Nginx web server for the webapp, with the following content:
+1. Create an example yaml file named "webapp-deploymment.yaml" to use a simple Nginx web server for the webapp with the following content:
   
 webapp-deploymment.yaml:
 ```yaml
@@ -47,6 +47,36 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+```
+
+2. Run the following terminal command to deploy the web server.
+
+```bash
+kubectl apply -f webapp-deployment.yaml
+```
+
+3. Create an example yaml file named "webapp-service.yaml" to create a service to expose the deployment with the following content:
+
+webapp-service.yaml:
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+spec:
+  selector:
+    app: webapp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort
+```
+
+4. Run the following terminal command to expose the web application's service.
+
+```bash
+kubectl apply -f webapp-service.yaml
 ```
 
 
