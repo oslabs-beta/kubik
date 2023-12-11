@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -28,18 +28,18 @@ const HomePage = () => {
   // const [displayClusters, setDisplayClusters] = useState(false);
 
   // Function to addNewCluster
-  const addNewCluster = (data) => {
-    if (selectedClusterId) {
-      setClusters(
-        clusters.map((cluster) =>
-          cluster.id === selectedClusterId
-            ? { ...data, id: selectedClusterId }
-            : cluster
-        )
-      );
-    } else {
-      setClusters([...clusters, { ...data, id: uuidv4() }]);
+  const addNewCluster = async (data) => {
+    const res = await fetch('http://localhost:3020/api/cluster/getclusters', {
+      method: 'GET',
+      credentials: 'include',
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
     }
+
+    const updatedClusters = await res.json();
+    setClusters(updatedClusters);
     setOpen(false);
     setSelectedClusterId(null);
   };
@@ -85,8 +85,41 @@ const HomePage = () => {
       // console.log('click');
     };
 
-    const handleDeleteCluster = (clusterId) => {
-      setClusters(clusters.filter((cluster) => cluster.id !== clusterId));
+    const handleDeleteCluster = async (clusterId) => {
+      try {
+        const response = await fetch(
+          `http://localhost:3020/api/cluster/delete/${clusterId}`,
+          {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include',
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const res = await fetch(
+          'http://localhost:3020/api/cluster/getclusters',
+          {
+            method: 'GET',
+            credentials: 'include',
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const updatedClusters = await res.json();
+        setClusters(updatedClusters); // Assuming the server returns the updated list of clusters
+      } catch (error) {
+        console.error('Could not delete the cluster:', error);
+        // Handle the error e.g., show an error message to the user
+      }
     };
 
     // Conditional logic to render default (will render just a button to add clusters) or user's cluster
@@ -117,14 +150,15 @@ const HomePage = () => {
                   xs={2}
                   sm={2}
                   md={2}
-                  key={cluster.id}
+                  // key={cluster.id}
+                  key={uuidv4()}
                   id={index}
                   sx={gridStyles.gridItem}
                 >
                   <Stack>
                     <Item>Cluster Name: {cluster.clusterName}</Item>
                     <Item>Cluster Url: {cluster.clusterUrl}</Item>
-                    <Item>Cluster Port: {cluster.clusterPort}</Item>
+                    {/* <Item>Cluster Port: {cluster.clusterPort}</Item> */}
                   </Stack>
 
                   <Stack
@@ -135,7 +169,7 @@ const HomePage = () => {
                   >
                     <Button
                       variant="contained"
-                      onClick={() => handleDeleteCluster(cluster.id)}
+                      onClick={() => handleDeleteCluster(cluster._id)}
                     >
                       Delete
                     </Button>
@@ -199,6 +233,22 @@ const HomePage = () => {
     return <>{renderContent()}</>;
   };
 
+  useEffect(() => {
+    const getClusters = async () => {
+      const response = await fetch(
+        'http://localhost:3020/api/cluster/getclusters',
+        {
+          method: 'GET',
+          credentials: 'include',
+        }
+      );
+      const clustersData = await response.json();
+      setClusters(clustersData);
+    };
+
+    getClusters();
+  }, []);
+
   return (
     <>
       {getContent()}
@@ -212,5 +262,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-// 6574fa090e4f728dacd6c583 <-- mongo cluster id
