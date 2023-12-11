@@ -79,17 +79,8 @@ const Dashboard = () => {
         width: '100vw',
       }}
     >
-      {/* Header section */}
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div">
-            Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <div
         style={{
-          marginTop: '60px',
           marginLeft: '260px',
           width: '81vw',
         }}
