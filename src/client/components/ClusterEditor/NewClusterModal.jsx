@@ -86,9 +86,9 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
   };
 
   // 'addUser' - handles opening Modal
-  const addCluster = (data) => {
-    createCluster(data);
-    addNewCluster(data);
+  const addCluster = async (data) => {
+    await createCluster(data);
+    await addNewCluster(data);
   };
 
   // Function to handle submit
