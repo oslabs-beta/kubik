@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CommonModal from '../common/CommonModal/CommonModal';
-// import Modal from '@mui/material/Modal';
-// import Button from '@mui/material/Button';
-import CommonButton from '../common/CommonButton/CommonButton';
 import Box from '@mui/material/Box';
-// import Input from '@mui/material/Input';
 import TextField from '@mui/material/TextField';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -91,18 +87,16 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
 
   // 'addUser' - handles opening Modal
   const addCluster = (data) => {
-    console.log(data);
     createCluster(data);
     addNewCluster(data);
   };
 
   // Function to handle submit
   const handleChange = (value) => {
-    // console.log(value);
     setValues(value);
   };
 
-  // useEffect that will set values to default if first open
+  // useEffect that will set values to default
   useEffect(() => {
     if (open) setValues(defaultInputValues);
   }, [open]);
