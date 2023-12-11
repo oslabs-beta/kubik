@@ -1,147 +1,216 @@
 import React, { useState } from 'react';
-// import { useLocation, Link } from 'react-router-dom'; // Import useLocation
-// import Grid from '@mui/material/Grid';
-// import Card from '@mui/material/Card';
-// import Button from '@mui/material/Button';
-// import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import CommonCard from '../components/common/CommonCard/CommonCard';
-import SearchBar from '../components/common/SearchBar/SearchBar';
-import CommonButton from '../components/common/CommonButton/CommonButton';
 import Typography from '@mui/material/Typography';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import IconButton from '@mui/material/IconButton';
-import GridWrapper from '../components/common/GridWrapper/GridWrapper';
-// import CommonModal from '../components/common/CommonModal/CommonModal';
 import NewClusterModal from '../components/ClusterEditor/NewClusterModal';
 import { v4 as uuidv4 } from 'uuid';
-import BasicSnackbar from '../components/common/BasicSnackbar/BasicSnackbar';
+import Stack from '@mui/material/Stack';
+import Grid from '@mui/material/Unstable_Grid2';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
+import Logo from '../../assets/kubik.svg';
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'black',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 // Add Cluster functionality on this page
 const HomePage = () => {
   // State for showing Cluster modal
   const [open, setOpen] = useState(false);
   const [clusters, setClusters] = useState([]);
-  const [openSnack, setOpenSnack] = useState(false);
+  // const [openSnack, setOpenSnack] = useState(false);
+  const [selectedClusterId, setSelectedClusterId] = useState(null);
+  // const [displayClusters, setDisplayClusters] = useState(false);
 
-  // Functionality for Snackbar
-  const handleClick = () => {
-    setOpenSnack(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+  // Function to addNewCluster
+  const addNewCluster = (data) => {
+    if (selectedClusterId) {
+      setClusters(
+        clusters.map((cluster) =>
+          cluster.id === selectedClusterId
+            ? { ...data, id: selectedClusterId }
+            : cluster
+        )
+      );
+    } else {
+      setClusters([...clusters, { ...data, id: uuidv4() }]);
     }
-    setOpenSnack(false);
+    setOpen(false);
+    setSelectedClusterId(null);
   };
 
-  // Function to handle search bar functionality
-  const getSearchBar = () => {
-    // Function to handle user inputs
-    const handleChange = (value) => {
-      console.log(value);
+  // Conditional function for rendering
+  const getContent = () => {
+    // Styles objects
+    const gridStyles = {
+      boxWrapper: {
+        flexGrow: '1',
+        paddingTop: '200px',
+        justifyContent: 'center',
+        backgroundColor: 'purple',
+        width: '100%',
+        marginLeft: '260px',
+      },
+      boxContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+      },
+      title: {
+        marginLeft: '120px',
+      },
+      addClusterButton: {
+        alignSelf: 'flex-end',
+        marginRight: '200px',
+      },
+      gridContainer: {
+        backgroundColor: 'orange',
+        justifyContent: 'center',
+      },
+      gridItem: {
+        backgroundColor: 'yellow',
+        margin: '20px',
+      },
     };
 
-    // Function to open NewClusterModal
-    const addCluster = () => {
+    /*** Functionality ***/
+    const handleAddCluster = () => {
       setOpen(true);
       // console.log('click');
     };
 
-    // Styles obj
-    // TODO: Need to move styles to its own file
-    const headerStyles = {
-      wrapper: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        height: '65px',
-        backgroundColor: '#f5f5f5',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.12',
-      },
-      addClusterButton: {
-        fontSize: '1.05rem',
-      },
+    const handleDeleteCluster = (clusterId) => {
+      setClusters(clusters.filter((cluster) => cluster.id !== clusterId));
     };
 
-    return (
-      <Box sx={headerStyles.wrapper}>
-        <SearchBar
-          placeholder="Search for a cluster"
-          onChange={(e) => handleChange(e.target.value)}
-          searchBarWidth="720px"
-        />
-        <Box>
-          <CommonButton
-            variant="contained"
-            onClick={addCluster}
-            size="large"
-            sx={headerStyles.addClusterButton}
-          >
-            Add cluster
-          </CommonButton>
-          <IconButton>
-            <RefreshIcon />
-          </IconButton>
-        </Box>
-      </Box>
-    );
-  };
+    // Conditional logic to render default (will render just a button to add clusters) or user's cluster
+    const renderContent = () => {
+      if (clusters.length) {
+        return (
+          <Box sx={gridStyles.boxWrapper}>
+            <Box sx={gridStyles.boxContainer}>
+              <Typography variant="h1" component="h1" sx={gridStyles.title}>
+                Clusters
+              </Typography>
+              <Button
+                variant="contained"
+                sx={gridStyles.addClusterButton}
+                onClick={handleAddCluster}
+              >
+                Add New Cluster
+              </Button>
+            </Box>
+            <Grid
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 4, sx: 8, md: 12 }}
+              sx={gridStyles.gridContainer}
+            >
+              {clusters.map((cluster, index) => (
+                <Grid
+                  xs={2}
+                  sm={2}
+                  md={2}
+                  key={cluster.id}
+                  id={index}
+                  sx={gridStyles.gridItem}
+                >
+                  <Stack>
+                    <Item>Cluster Name: {cluster.clusterName}</Item>
+                    <Item>Cluster Url: {cluster.clusterUrl}</Item>
+                    <Item>Cluster Port: {cluster.clusterPort}</Item>
+                  </Stack>
 
-  // Function to addNewCluster
-  const addNewCluster = (data) => {
-    clusters.push({ ...data });
-    setOpen(false);
-
-    // Invoke Snackbar
-    setOpenSnack(true);
-  };
-
-  // Function to get available Clusters
-  const getCluster = () => (
-    <>
-      {clusters.length ? (
-        clusters.map((cluster, index) => (
-          <Box key={uuidv4()} index={index} sx={{ marginBottom: '20px' }}>
-            <Typography>Cluster Name: {cluster.clusterName}</Typography>
-            <Typography>Cluster URL: {cluster.clusterUrl}</Typography>
-            <Typography>Cluster Port: {cluster.clusterPort}</Typography>
+                  <Stack
+                    direction="row"
+                    justifyContent="space-evenly"
+                    alignItems="center"
+                    spacing={4}
+                  >
+                    <Button
+                      variant="contained"
+                      onClick={() => handleDeleteCluster(cluster.id)}
+                    >
+                      Delete
+                    </Button>
+                  </Stack>
+                </Grid>
+              ))}
+            </Grid>
           </Box>
-        ))
-      ) : (
-        <Typography
-          align="center"
-          sx={{
-            margin: '40px 16px',
-            color: 'rgba(0, 0, 0, 0.6)',
-            fontSize: '1.3rem',
-          }}
-        >
-          No clusters added yet
-        </Typography>
-      )}
-    </>
-  );
+        );
+      } else {
+        return (
+          <Box
+            sx={{
+              width: '100%',
+              marginLeft: '260px',
+              backgroundColor: 'green',
+              minHeight: '100vh',
+              flexGrow: '1',
+              paddingTop: '200px',
+              justifyContent: 'center',
+            }}
+          >
+            <Typography variant="h1" component="h1" sx={gridStyles.title}>
+              Home
+            </Typography>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: 'pink',
+              }}
+            >
+              <Paper
+                sx={{
+                  width: '500px',
+                  height: '500px',
+                  backgroundColor: 'purple',
+                  display: 'flex',
+                  flexDirection: 'column',
+                }}
+              >
+                <Typography
+                  sx={{
+                    alignSelf: 'center',
+                    position: 'fixed',
+                    marginTop: '35px',
+                  }}
+                >
+                  Click to add a new cluster
+                </Typography>
+                <Button onClick={handleAddCluster}>
+                  <img src={Logo} alt="kubik logo" />
+                </Button>
+              </Paper>
+            </Box>
+          </Box>
+        );
+      }
+    };
+    return <>{renderContent()}</>;
+  };
 
   return (
-    <GridWrapper>
-      <CommonCard header={getSearchBar()} content={getCluster()} />
+    <>
+      {getContent()}
       <NewClusterModal
         open={open}
         onClose={() => setOpen(false)}
         addNewCluster={addNewCluster}
       />
-      <BasicSnackbar
-        open={openSnack}
-        onClose={handleClose}
-        severity="success"
-        message="Successfully added a Cluster"
-      />
-    </GridWrapper>
+    </>
   );
 };
 
 export default HomePage;
+
+// 6574fa090e4f728dacd6c583 <-- mongo cluster id
