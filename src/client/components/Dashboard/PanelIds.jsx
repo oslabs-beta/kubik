@@ -10,4 +10,4 @@ const metrics = {
   // },
 };
 
-module.exports = metrics;
+export default metrics;

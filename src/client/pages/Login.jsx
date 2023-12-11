@@ -122,6 +122,18 @@ const Login = () => {
           >
             Sign In
           </Button>
+          <a
+            href="http://localhost:3020/api/auth/google"
+            style={{ textDecoration: 'none' }}
+          >
+            <Button
+              fullWidth
+              variant="contained"
+              sx={{ mt: 1, mb: 2, backgroundColor: '#4285F4' }}
+            >
+              Log in with Google
+            </Button>
+          </a>
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
