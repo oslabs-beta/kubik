@@ -25,6 +25,11 @@ router
     }
   )
 
+  // Get clusters only
+  .get('/getclusters', clusterController.getCluster, (req, res) => {
+    return res.status(200).json(res.locals.clusters);
+  })
+
   // Add clusters
   .post(
     '/add',
@@ -37,8 +42,13 @@ router
   )
 
   // Delete clusters
-  .delete('/delete/:clusterId', clusterController.deleteCluster, (req, res) => {
-    res.status(200).json(res.locals.updatedClusters);
-  });
+  .delete(
+    '/delete/:clusterId',
+    clusterController.deleteCluster,
+    clusterController.getCluster,
+    (req, res) => {
+      res.status(200).json(res.locals.clusters);
+    }
+  );
 
 module.exports = router;
