@@ -25,12 +25,12 @@ export const mainNavbarItems = [
     label: 'Cluster View',
     route: '/main-page/cluster-view',
   },
-  {
-    id: 3,
-    icon: <PublicIcon />,
-    label: 'Alerts',
-    route: '/main-page/alerts',
-  },
+  // {
+  //   id: 3,
+  //   icon: <PublicIcon />,
+  //   label: 'Alerts',
+  //   route: '/main-page/alerts',
+  // },
   // {
   //   id: 5,
   //   icon: <SettingsEthernetIcon />,

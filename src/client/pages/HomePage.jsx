@@ -11,6 +11,8 @@ import Paper from '@mui/material/Paper';
 import Logo from '../../assets/kubik.svg';
 import { useSpring, animated } from 'react-spring';
 import { ToastContainer, toast } from 'react-toastify';
+import AnimatedWave from '../components/AnimatedWave/AnimatedWave';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#40444b',
@@ -33,6 +35,31 @@ const HomePage = () => {
   //
   const buttonAnimation = useSpring({});
 
+  /*** Toast ***/
+  const notifyAdd = () =>
+    toast.success('Successfully added a cluster', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+
+  const notifyDelete = () =>
+    toast.success('Successfully deleted a cluster', {
+      position: 'bottom-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    });
+
   // Function to addNewCluster
   const addNewCluster = async (data) => {
     const res = await fetch('http://localhost:3020/api/cluster/getclusters', {
@@ -48,6 +75,7 @@ const HomePage = () => {
     setClusters(updatedClusters);
     setOpen(false);
     setSelectedClusterId(null);
+    notifyAdd();
   };
 
   // Conditional function for rendering
@@ -57,7 +85,7 @@ const HomePage = () => {
       boxWrapper: {
         width: '100%',
         marginLeft: '260px',
-        backgroundColor: '#1b2123',
+        // backgroundColor: '#1b2123',
         minHeight: '100vh',
         flexGrow: '1',
         paddingTop: '200px',
@@ -67,7 +95,6 @@ const HomePage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'pink',
       },
       paperContainer: {
         width: '500px',
@@ -89,9 +116,10 @@ const HomePage = () => {
         flexGrow: '1',
         paddingTop: '200px',
         justifyContent: 'center',
-        backgroundColor: '#1b2123',
+        // backgroundColor: '#1b2123',
         width: '100%',
         marginLeft: '260px',
+        alignItems: 'center',
       },
       boxContainer: {
         display: 'flex',
@@ -161,6 +189,7 @@ const HomePage = () => {
 
         const updatedClusters = await res.json();
         setClusters(updatedClusters); // Assuming the server returns the updated list of clusters
+        notifyDelete();
       } catch (error) {
         console.error('Could not delete the cluster:', error);
         // Handle the error e.g., show an error message to the user
@@ -173,7 +202,12 @@ const HomePage = () => {
         return (
           <Box sx={gridStyles.boxWrapper}>
             <Box sx={gridStyles.boxContainer}>
-              <Typography variant="h1" component="h1" sx={gridStyles.title}>
+              <Typography
+                variant="h1"
+                component="h1"
+                sx={gridStyles.title}
+                style={{ letterSpacing: '3px' }}
+              >
                 Clusters
               </Typography>
               <Button
@@ -196,7 +230,6 @@ const HomePage = () => {
                     xs={2}
                     sm={2}
                     md={2}
-                    // key={cluster.id}
                     key={uuidv4()}
                     id={index}
                     sx={gridStyles.gridItem}
@@ -229,9 +262,6 @@ const HomePage = () => {
       } else {
         return (
           <Box sx={defaultStyles.boxWrapper}>
-            {/* <Typography variant="h1" component="h1" sx={gridStyles.title}>
-              Home
-            </Typography> */}
             <Box sx={defaultStyles.boxContainer}>
               <Paper sx={defaultStyles.paperContainer}>
                 <Typography sx={defaultStyles.buttonText}>
@@ -267,12 +297,36 @@ const HomePage = () => {
 
   return (
     <>
-      {getContent()}
-      <NewClusterModal
-        open={open}
-        onClose={() => setOpen(false)}
-        addNewCluster={addNewCluster}
-      />
+      <AnimatedWave />
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {getContent()}
+        <NewClusterModal
+          open={open}
+          onClose={() => setOpen(false)}
+          addNewCluster={addNewCluster}
+        />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </div>
     </>
   );
 };
