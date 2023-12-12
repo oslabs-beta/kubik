@@ -11,6 +11,9 @@ export const navbarStyles = {
     '& .Mui-selected': {
       color: 'red',
     },
+    '& .MuiDivider-root': {
+      display: 'none',
+    },
   },
   icons: {
     color: 'rgba(255, 255, 255, 0.7)!important',
