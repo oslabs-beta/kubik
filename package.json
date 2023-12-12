@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "NODE_ENV='development' electron .",
+    "start": "concurrently \"npm run dev\" \"npm run server\"",
     "dev": "concurrently \"NODE_ENV='development' nodemon server/server.js\" \"NODE_ENV='development' vite dev\" --host 0.0.0.0",
     "server": "nodemon src/server/server.js",
     "build": "vite build && npm run pack",
