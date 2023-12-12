@@ -13,7 +13,7 @@ router
     authController.signup,
     sessionController.addSession,
     (req, res) => {
-      return res.status(200).json(res.locals.user.username);
+      return res.status(200).json(res.locals.user);
     }
   )
 
@@ -24,7 +24,7 @@ router
     bcryptController.verifyPassword,
     sessionController.addSession,
     (req, res) => {
-      return res.status(200).json(res.locals.user.username);
+      return res.status(200).json(res.locals.user);
     }
   )
 
@@ -46,7 +46,8 @@ router
     },
     sessionController.addSession,
     (req, res) => {
-      res.redirect('http://localhost:4444/main-page/');
+      res.redirect('http://localhost:4444/main-page/home');
+      return res.status(200).json(res.locals.user);
     }
   );
 

@@ -1,8 +1,16 @@
+const User = require('../models/userModel');
+
 const sessionController = {
   // Check if user is authenticated
-  checkSession: (req, res) => {
+  checkSession: async (req, res) => {
     if (req.session.userId) {
-      return res.status(200).send('Session valid');
+      const user = await User.findById(req.session.userId);
+
+      if (!user) {
+        return res.status(401).send('Invalid user');
+      }
+
+      return res.status(200).send(user);
     } else {
       return res.status(401).send('Unauthorized: No active session');
     }
