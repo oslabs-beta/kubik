@@ -13,15 +13,19 @@ const Header = ({ title }) => {
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: '#009be5',
-      padding: '20px',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#ffff',
+    },
+    title: {
+      fontSize: '25px',
+      color: '#5193B3',
     },
     topRow: {
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'end',
       alignItems: 'center',
-      marginBottom: '20px',
       '*': {
         marginRight: '5px',
       },
@@ -31,8 +35,9 @@ const Header = ({ title }) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      marginBottom: '20px',
-      marginLeft: '320px',
+      marginTop: '40px',
+      marginBottom: '30px',
+      marginLeft: '280px',
     },
     link: {
       fontWeight: 500,
@@ -49,15 +54,15 @@ const Header = ({ title }) => {
 
   return (
     <Box sx={headerStyles.wrapper}>
-      <Box sx={headerStyles.topRow}>
+      {/* <Box sx={headerStyles.topRow}>
         <Typography sx={headerStyles.link}>Go to docs</Typography>
         <Avatar src="https://mui.com/static/images/avatar/1.jpg" />
-      </Box>
+      </Box> */}
       <Box sx={headerStyles.middleRow}>
-        <Typography variant="h1" color="white">
+        <Typography variant="h1" sx={headerStyles.title}>
           {title}
         </Typography>
-        <Box>
+        {/* <Box>
           <CommonButton sx={headerStyles.webButton} variant="outlined">
             Web setup
           </CommonButton>
@@ -66,7 +71,7 @@ const Header = ({ title }) => {
               <HelpIcon />
             </IconButton>
           </Tooltip>
-        </Box>
+        </Box> */}
       </Box>
     </Box>
   );

@@ -4,7 +4,6 @@ const chartController = {
   // Middleware for building chart URLs for the frontend
   getChartUrls: (req, res, next) => {
     const clusterUrl = res.locals.clusterUrl;
-    console.log(clusterUrl);
     const chartUrls = [];
 
     Object.values(metrics).forEach((metric) => {

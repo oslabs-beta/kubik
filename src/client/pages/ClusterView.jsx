@@ -5,7 +5,7 @@ import nodeImg from '../../assets/node.png';
 import podImg from '../../assets/pod.png';
 import svcImg from '../../assets/svc.png';
 import logo from '../../assets/kubik-logo.png';
-import ns from '../../assets/ns.png';
+// import ns from '../../assets/ns.png';
 import Typography from '@mui/material/Typography';
 
 let initialOptions = {

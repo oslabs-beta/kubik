@@ -20,7 +20,6 @@ const Dashboard = () => {
         credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (err) {
       console.log(err, 'Cluster POST request unsuccessful');
@@ -33,7 +32,6 @@ const Dashboard = () => {
         credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (err) {
       console.log(err, 'Cluster data request unsuccessful');
@@ -46,7 +44,6 @@ const Dashboard = () => {
       const nodesData = await getClusterData();
       setNodesArr(nodes);
       setNodesData(nodesData);
-      console.log('nodesData', nodesData);
     };
 
     fetchNodes();
@@ -79,17 +76,8 @@ const Dashboard = () => {
         width: '100vw',
       }}
     >
-      {/* Header section */}
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div">
-            Dashboard
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <div
         style={{
-          marginTop: '60px',
           marginLeft: '260px',
           width: '81vw',
         }}

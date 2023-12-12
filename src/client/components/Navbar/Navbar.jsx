@@ -8,8 +8,9 @@ import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CommonButton from '../common/CommonButton/CommonButton';
+import Logo from '../../../assets/kubik-crop.png';
 
 // Import from mainNavbarItems, then use map to iterate through arr of items to display in navbar
 import { mainNavbarItems } from './consts/mainNavbarItems';
@@ -26,11 +27,10 @@ const Navbar = () => {
       });
 
       if (response.ok) {
-        console.log('loggedout');
         navigate('/');
       } else {
         // need to handle error
-        console.log('Failed to Sign Out');
+        navigate('/');
       }
     } catch (error) {
       // need logic to handle error
@@ -40,7 +40,25 @@ const Navbar = () => {
 
   return (
     <Drawer sx={navbarStyles.drawer} variant="permanent" anchor="left">
-      <Toolbar />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <img
+          src={Logo}
+          alt="Logo"
+          style={{
+            width: '40%',
+            height: '80%',
+            padding: '8px',
+            marginTop: '10px',
+          }}
+        />
+      </Box>
+      {/* <Toolbar /> */}
       <Divider />
       <List>
         {mainNavbarItems.map((item) => (
