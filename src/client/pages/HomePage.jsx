@@ -82,7 +82,6 @@ const HomePage = () => {
     /*** Functionality ***/
     const handleAddCluster = () => {
       setOpen(true);
-      // console.log('click');
     };
 
     const handleDeleteCluster = async (clusterId) => {

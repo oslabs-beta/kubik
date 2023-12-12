@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 //import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -32,10 +31,6 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
         credentials: 'include',
       });
-
-      // responseUsername is string from backend
-      // may need it to render username on the main dashboard
-      const responseUsername = await response.json();
 
       if (response.ok) {
         // Redirect to main page

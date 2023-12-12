@@ -38,10 +38,6 @@ const Signup = () => {
         credentials: 'include',
       });
 
-      // responseUsername is string from backend
-      // may need it to render username on the main dashboard
-      const responseUsername = await response.json();
-
       if (!response.ok) {
         // need logic for failed auth
         console.error('Sign Up Failed:');

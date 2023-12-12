@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar.jsx';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
-// import Header from './components/Header/Header.jsx';
 
 if (typeof global === 'undefined') {
   window.global = window;
@@ -10,8 +9,6 @@ if (typeof global === 'undefined') {
 
 const App = () => {
   const navigate = useNavigate();
-  // const [loggedIn, setLoggedIn] = useState(false);
-  // const [username, setUsername] = useState('');
 
   const checkSession = async () => {
     try {
@@ -30,10 +27,6 @@ const App = () => {
   useEffect(() => {
     checkSession();
   }, []);
-
-  // if (!loggedIn) {
-  //   return <Navigate href="/" replace />;
-  // }
 
   return (
     <Grid container>
