@@ -12,6 +12,7 @@ const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [title, setTitle] = useState('Home');
+  const [fullname, setFullname] = useState('');
 
   const getTitleByPathname = (pathname) => {
     const pathSegments = pathname.split('/').filter(Boolean);
@@ -35,6 +36,15 @@ const App = () => {
       if (!response.ok) {
         navigate('/');
       }
+
+      const user = await response.json();
+      console.log('log user', user);
+
+      if (fullname === '') {
+        const userFullName = `${user.firstName} ${user.lastName}`;
+        setFullname(userFullName);
+      }
+      const test = 'welcome' + fullname;
     } catch (error) {
       console.error('Error checking session', error);
     }
@@ -52,7 +62,7 @@ const App = () => {
   return (
     <Grid container>
       <Navbar />
-      <Header title={title} />
+      <Header title={title} fullname={fullname} />
       <Outlet context={{}} />
     </Grid>
   );
