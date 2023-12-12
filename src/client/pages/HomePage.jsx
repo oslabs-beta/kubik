@@ -229,9 +229,9 @@ const HomePage = () => {
       } else {
         return (
           <Box sx={defaultStyles.boxWrapper}>
-            <Typography variant="h1" component="h1" sx={gridStyles.title}>
+            {/* <Typography variant="h1" component="h1" sx={gridStyles.title}>
               Home
-            </Typography>
+            </Typography> */}
             <Box sx={defaultStyles.boxContainer}>
               <Paper sx={defaultStyles.paperContainer}>
                 <Typography sx={defaultStyles.buttonText}>
