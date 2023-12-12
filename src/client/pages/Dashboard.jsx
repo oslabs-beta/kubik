@@ -20,7 +20,6 @@ const Dashboard = () => {
         credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (err) {
       console.log(err, 'Cluster POST request unsuccessful');
@@ -33,7 +32,6 @@ const Dashboard = () => {
         credentials: 'include',
       });
       const result = await response.json();
-      console.log(result);
       return result;
     } catch (err) {
       console.log(err, 'Cluster data request unsuccessful');
@@ -46,7 +44,6 @@ const Dashboard = () => {
       const nodesData = await getClusterData();
       setNodesArr(nodes);
       setNodesData(nodesData);
-      console.log('nodesData', nodesData);
     };
 
     fetchNodes();

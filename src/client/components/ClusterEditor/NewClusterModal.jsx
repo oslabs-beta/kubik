@@ -13,8 +13,6 @@ const defaultInputValues = {
 };
 
 const NewClusterModal = ({ open, onClose, addNewCluster }) => {
-  // const [open, setOpen] = useState(false);
-  // const [clusters, setClusters] = useState([]);
   const [values, setValues] = useState(defaultInputValues);
 
   // Styles for modal
@@ -81,7 +79,7 @@ const NewClusterModal = ({ open, onClose, addNewCluster }) => {
         const result = await response.json();
       }
     } catch (err) {
-      console.log(err, 'Cluster POST request unsuccessful');
+      err, 'Cluster POST request unsuccessful';
     }
   };
 

@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CommonButton from '../common/CommonButton/CommonButton';
 import Logo from '../../../assets/kubik-crop.png';
 
@@ -27,11 +27,10 @@ const Navbar = () => {
       });
 
       if (response.ok) {
-        console.log('loggedout');
         navigate('/');
       } else {
         // need to handle error
-        console.log('Failed to Sign Out');
+        navigate('/');
       }
     } catch (error) {
       // need logic to handle error
