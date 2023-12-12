@@ -34,7 +34,7 @@ const Login = () => {
 
       if (response.ok) {
         // Redirect to main page
-        navigate('/main-page');
+        navigate('/main-page/home');
       } else {
         // reroute to mainpage
         // Branden might need to change this
