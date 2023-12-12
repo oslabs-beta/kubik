@@ -8,19 +8,19 @@ Kubik is an open-source Kubernetes visualization dashboard designed to give you 
 
 ### Google OAuth 2.0
 
-WRITE TEXT HERE
+Secure your Kubernetes cluster health monitoring with the power of Google Authentication and log in seamlessly using your Google credentials. This standardized approach to user access provides a robust layer of security for your project and cluster data.
 
 ---DO WE NEED GIF HERE---???
 
-### Manage Clusters
+### Adding Clusters
 
-Add and name or delete your clusters.
+Expand your monitoring capabilities by connecting and adding Kubernetes clusters to your centralized health tracking system. Streamline the process of integrating clusters, allowing you to keep an eye on multiple environments from a single platform.
 
 ---GIF GOES HERE---SHOW HOW TO ADD AND DELETE
 
-### Metrics Visualization
+### Cluster Visualization
 
-View important metrics and graphs to monitor cluster health.
+Gain a deeper understanding of your Kubernetes ecosystem with an interactive cluster graph representation. Explore the intricate relationships and complex interdependencies among nodes, pods, services, and deployments in a visually engaging manner.
 
 ---GIF GOES HERE---SHOW THE GRAPHS PAGE
 
@@ -153,17 +153,13 @@ kubectl port-forward svc/prometheus-server 9090:80 -n default
 16. Install the dependencies by running the following command:
 
 ```bash
-npm i
+npm install
 ```
 
 17. Run the application by running the following commands:
 
 ```bash
-npm run dev
-```
-
-```bash
-npm run server
+npm run start
 ```
 
 18. Visit `http://localhost:[PORT]` in your browser.

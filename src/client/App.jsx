@@ -38,13 +38,11 @@ const App = () => {
       }
 
       const user = await response.json();
-      console.log('log user', user);
 
       if (fullname === '') {
         const userFullName = `${user.firstName} ${user.lastName}`;
         setFullname(userFullName);
       }
-      const test = 'welcome' + fullname;
     } catch (error) {
       console.error('Error checking session', error);
     }
