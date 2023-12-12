@@ -9,13 +9,15 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Logo from '../../assets/kubik.svg';
+import { useSpring, animated } from 'react-spring';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : 'black',
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#40444b',
   ...theme.typography.body2,
   padding: theme.spacing(2),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
+  textAlign: 'left',
+  color: 'white',
 }));
 
 // Add Cluster functionality on this page
@@ -26,6 +28,10 @@ const HomePage = () => {
   // const [openSnack, setOpenSnack] = useState(false);
   const [selectedClusterId, setSelectedClusterId] = useState(null);
   // const [displayClusters, setDisplayClusters] = useState(false);
+
+  /*** Animations ***/
+  //
+  const buttonAnimation = useSpring({});
 
   // Function to addNewCluster
   const addNewCluster = async (data) => {
@@ -47,12 +53,43 @@ const HomePage = () => {
   // Conditional function for rendering
   const getContent = () => {
     // Styles objects
+    const defaultStyles = {
+      boxWrapper: {
+        width: '100%',
+        marginLeft: '260px',
+        backgroundColor: '#1b2123',
+        minHeight: '100vh',
+        flexGrow: '1',
+        paddingTop: '200px',
+        justifyContent: 'center',
+      },
+      boxContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // backgroundColor: 'pink',
+      },
+      paperContainer: {
+        width: '500px',
+        height: '500px',
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#2f3136',
+      },
+      buttonText: {
+        alignSelf: 'center',
+        position: 'fixed',
+        marginTop: '35px',
+        color: '#f8d49b',
+      },
+    };
+
     const gridStyles = {
       boxWrapper: {
         flexGrow: '1',
         paddingTop: '200px',
         justifyContent: 'center',
-        backgroundColor: 'purple',
+        backgroundColor: '#1b2123',
         width: '100%',
         marginLeft: '260px',
       },
@@ -64,25 +101,33 @@ const HomePage = () => {
       },
       title: {
         marginLeft: '120px',
+        color: '#f8d49b',
+      },
+      boxContent: {
+        height: '100vh',
       },
       addClusterButton: {
         alignSelf: 'flex-end',
         marginRight: '200px',
       },
       gridContainer: {
-        backgroundColor: 'orange',
         justifyContent: 'center',
       },
       gridItem: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#40444b',
         margin: '20px',
+        border: 1,
+        borderRadius: '12px',
+      },
+      stackContainer: {
+        border: 1,
+        borderRadius: '12px',
       },
     };
 
     /*** Functionality ***/
     const handleAddCluster = () => {
       setOpen(true);
-      // console.log('click');
     };
 
     const handleDeleteCluster = async (clusterId) => {
@@ -139,86 +184,57 @@ const HomePage = () => {
                 Add New Cluster
               </Button>
             </Box>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 3 }}
-              columns={{ xs: 4, sx: 8, md: 12 }}
-              sx={gridStyles.gridContainer}
-            >
-              {clusters.map((cluster, index) => (
-                <Grid
-                  xs={2}
-                  sm={2}
-                  md={2}
-                  // key={cluster.id}
-                  key={uuidv4()}
-                  id={index}
-                  sx={gridStyles.gridItem}
-                >
-                  <Stack>
-                    <Item>Cluster Name: {cluster.clusterName}</Item>
-                    <Item>Cluster Url: {cluster.clusterUrl}</Item>
-                    {/* <Item>Cluster Port: {cluster.clusterPort}</Item> */}
-                  </Stack>
-
-                  <Stack
-                    direction="row"
-                    justifyContent="space-evenly"
-                    alignItems="center"
-                    spacing={4}
+            <Box sx={gridStyles.boxContent}>
+              <Grid
+                container
+                spacing={{ xs: 2, md: 3 }}
+                columns={{ xs: 4, sx: 8, md: 12 }}
+                sx={gridStyles.gridContainer}
+              >
+                {clusters.map((cluster, index) => (
+                  <Grid
+                    xs={2}
+                    sm={2}
+                    md={2}
+                    // key={cluster.id}
+                    key={uuidv4()}
+                    id={index}
+                    sx={gridStyles.gridItem}
                   >
-                    <Button
-                      variant="contained"
-                      onClick={() => handleDeleteCluster(cluster._id)}
+                    <Stack sx={gridStyles.stackContainer}>
+                      <Item>Cluster Name: {cluster.clusterName}</Item>
+                      <Item>Cluster Url: {cluster.clusterUrl}</Item>
+                      {/* <Item>Cluster Port: {cluster.clusterPort}</Item> */}
+                    </Stack>
+
+                    <Stack
+                      direction="row"
+                      justifyContent="space-evenly"
+                      alignItems="center"
+                      sx={{ marginTop: '15px' }}
                     >
-                      Delete
-                    </Button>
-                  </Stack>
-                </Grid>
-              ))}
-            </Grid>
+                      <Button
+                        variant="contained"
+                        onClick={() => handleDeleteCluster(cluster._id)}
+                      >
+                        Delete
+                      </Button>
+                    </Stack>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </Box>
         );
       } else {
         return (
-          <Box
-            sx={{
-              width: '100%',
-              marginLeft: '260px',
-              backgroundColor: 'green',
-              minHeight: '100vh',
-              flexGrow: '1',
-              paddingTop: '200px',
-              justifyContent: 'center',
-            }}
-          >
+          <Box sx={defaultStyles.boxWrapper}>
             <Typography variant="h1" component="h1" sx={gridStyles.title}>
               Home
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'pink',
-              }}
-            >
-              <Paper
-                sx={{
-                  width: '500px',
-                  height: '500px',
-                  backgroundColor: 'purple',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <Typography
-                  sx={{
-                    alignSelf: 'center',
-                    position: 'fixed',
-                    marginTop: '35px',
-                  }}
-                >
+            <Box sx={defaultStyles.boxContainer}>
+              <Paper sx={defaultStyles.paperContainer}>
+                <Typography sx={defaultStyles.buttonText}>
                   Click to add a new cluster
                 </Typography>
                 <Button onClick={handleAddCluster}>
