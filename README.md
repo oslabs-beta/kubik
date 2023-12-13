@@ -91,7 +91,7 @@ spec:
 kubectl apply -f webapp-service.yaml
 ```
 
-7. Update the "webapp-service.yaml" file to include Prommetheus annotations. This allows your application to be discovered and scaped for metrics.
+7. Update the "webapp-service.yaml" file to include Prommetheus annotations. This allows your application to be discovered and scraped for metrics.
 
 webapp-service.yaml
 
