@@ -98,7 +98,7 @@ const HomePage = () => {
       },
       paperContainer: {
         width: '500px',
-        height: '500px',
+        height: '450px',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: '#2f3136',
@@ -107,16 +107,15 @@ const HomePage = () => {
         alignSelf: 'center',
         position: 'fixed',
         marginTop: '35px',
-        color: '#f8d49b',
+        color: 'white',
       },
     };
 
     const gridStyles = {
       boxWrapper: {
         flexGrow: '1',
-        paddingTop: '200px',
+        paddingTop: '100px',
         justifyContent: 'center',
-        // backgroundColor: '#1b2123',
         width: '100%',
         marginLeft: '260px',
         alignItems: 'center',

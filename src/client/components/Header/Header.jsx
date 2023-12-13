@@ -12,30 +12,39 @@ const Header = ({ title, fullname }) => {
     wrapper: {
       width: '100%',
       display: 'flex',
-      flexDirection: 'column',
+      flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center',
+      // alignItems: 'baseline',
       backgroundColor: '#101F33',
-      borderBottom: '1px solid #fff',
+      // borderBottom: '1px solid #fff',
+      zIndex: 2,
+      height: '120px',
     },
     middleRow: {
       display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginTop: '40px',
-      marginBottom: '30px',
-      marginLeft: '280px',
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      justifyContent: 'flex-end',
+      // marginTop: '40px',
+      // marginBottom: '30px',
+      marginLeft: '260px',
+      width: '100%',
+      height: '100%',
     },
     title: {
-      fontSize: '25px',
+      fontSize: '34px',
+      letterSpacing: '3px',
       color: 'rgba(255, 255, 255, 0.7)',
+      // alignSelf: 'flex-end',
+      // paddingLeft: '180px',
+      paddingTop: '60px',
+      paddingRight: '640px',
     },
     welcome: {
       fontSize: '16px',
       color: 'rgba(255, 255, 255, 0.7)',
-      alignSelf: 'flex-end',
-      marginLEft: 'auto',
+      marginLeft: '200px',
+      paddingRight: '60px',
     },
     // topRow: {
     //   display: 'flex',
@@ -66,14 +75,14 @@ const Header = ({ title, fullname }) => {
         <Avatar src="https://mui.com/static/images/avatar/1.jpg" />
       </Box> */}
       <Box sx={headerStyles.middleRow}>
-        <Box>
+        <Box sx={{}}>
           <Typography variant="h1" sx={headerStyles.title}>
             {title}
           </Typography>
         </Box>
-        <Box>
+        <Box sx={{ marginLeft: '40px' }}>
           <Typography variant="h1" sx={headerStyles.welcome}>
-            Welcome {fullname}!
+            Welcome, {fullname}!
           </Typography>
         </Box>
         {/* <Box>

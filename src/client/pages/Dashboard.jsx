@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import MetricIframe from '../components/Dashboard/MetricIframe';
 import metrics from '../components/Dashboard/PanelIds';
+import AnimatedWave from '../components/AnimatedWave/AnimatedWave';
 
 const Dashboard = () => {
   const [nodesArr, setNodesArr] = useState([]);
@@ -72,14 +73,18 @@ const Dashboard = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        height: '80',
+        height: '100vh',
         width: '100vw',
+        backgroundColor: '#1b2123',
+        paddingTop: '40px',
       }}
     >
+      <AnimatedWave />
       <div
         style={{
           marginLeft: '260px',
           width: '81vw',
+          zIndex: 2,
         }}
       >
         {/* Banner section */}
