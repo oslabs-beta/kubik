@@ -274,7 +274,12 @@ const ClusterView = () => {
   ) : (
     <div>
       {/* Content */}
-      <div style={{ position: 'relative' }}>
+      <div
+        style={{
+          position: 'relative',
+          marginLeft: '260px',
+        }}
+      >
         <button
           onClick={changeGraphOptions}
           style={{

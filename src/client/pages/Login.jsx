@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import AnimatedWave from '../components/AnimatedWave/AnimatedWave';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -48,102 +49,112 @@ const Login = () => {
   };
 
   return (
-    <Container
-      component="main"
-      maxWidth="xs"
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        height: '100vh',
-        justifyContent: 'center',
-      }}
-    >
-      {/* <Container component="main" maxWidth="xs"> */}
-      {/* <CssBaseline /> */}
-      <Box
+    <>
+      <AnimatedWave />
+      <Container
+        component="main"
+        maxWidth="xs"
         sx={{
-          padding: 10,
-          marginTop: 'auto',
-          margin: 'auto',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
-          boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
-          bgcolor: '#ffffff',
-          width: '30vw',
-          borderRadius: 3,
+          height: '100vh',
+          justifyContent: 'center',
+          zIndex: 2,
+          position: 'relative',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Welcome
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            autoComplete="username"
-            id="username"
-            label="Username"
-            margin="normal"
-            name="username"
-            autoFocus
-            fullWidth
-            required
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            autoComplete="current-password"
-            id="password"
-            label="Password"
-            margin="normal"
-            name="password"
-            type="password"
-            fullWidth
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+        {/* <Container component="main" maxWidth="xs"> */}
+        {/* <CssBaseline /> */}
+        <Box
+          sx={{
+            padding: 10,
+            marginTop: 'auto',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#ffffff',
+            width: '30vw',
+            borderRadius: 3,
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Welcome
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
           >
-            Sign In
-          </Button>
-          <a
-            href="http://localhost:3020/api/auth/google"
-            style={{ textDecoration: 'none' }}
-          >
+            <TextField
+              autoComplete="username"
+              id="username"
+              label="Username"
+              margin="normal"
+              name="username"
+              autoFocus
+              fullWidth
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              autoComplete="current-password"
+              id="password"
+              label="Password"
+              margin="normal"
+              name="password"
+              type="password"
+              fullWidth
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
             <Button
+              type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 1, mb: 2, backgroundColor: '#4285F4' }}
+              sx={{ mt: 3, mb: 2 }}
             >
-              Log in with Google
+              Sign In
             </Button>
-          </a>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+            <a
+              href="http://localhost:3020/api/auth/google"
+              style={{ textDecoration: 'none' }}
+            >
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mt: 1, mb: 2, backgroundColor: '#4285F4' }}
+              >
+                Log in with Google
+              </Button>
+            </a>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="/signup" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link href="/signup" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </>
   );
 };
 

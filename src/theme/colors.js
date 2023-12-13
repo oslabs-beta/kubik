@@ -27,7 +27,7 @@ export const neutral = {
 export const blue = withAlphas({
   light: '#73A8C2',
   main: '#5193B3',
-  dark: '38667D',
+  dark: '#38667D',
   contrastText: '#FFFFFF',
 });
 
