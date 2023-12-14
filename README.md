@@ -19,6 +19,7 @@
 [![MaterialUI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Jest](https://img.shields.io/badge/-jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 
 </div>
 
@@ -205,7 +206,7 @@ Any contributions are always welcomed and appreciated!
 
 ## Our Team
 
-- Branden Chi [GitHub](https://github.com/brandenchi) | [LinkedIn]()
-- Felipe Varela [GitHub](https://github.com/var-ela) | [LinkedIn](https://github.com/var-ela)
-- Sung Ku Kang [GitHub](https://github.com/sung-kang) | [LinkedIn](https://github.com/sung-kang)
-- Yvonne Tram [GitHub](https://github.com/yqtram) | [LinkedIn](https://github.com/yqtram)
+- Branden Chi [GitHub](https://github.com/brandenchi) | [LinkedIn](https://github.com/brandenchi)
+- Felipe Varela [GitHub](https://github.com/var-ela) | [LinkedIn](https://www.linkedin.com/in/phil-varela-co/)
+- Sung Ku Kang [GitHub](https://github.com/sung-kang) | [LinkedIn](https://www.linkedin.com/in/sung-kang/)
+- Yvonne Tram [GitHub](https://github.com/yqtram) | [LinkedIn](https://www.linkedin.com/in/yqtram/)
