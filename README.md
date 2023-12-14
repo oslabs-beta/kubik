@@ -1,36 +1,38 @@
-# Kubik
+# kubik
 
-## Welcome to <b>Kubik</b>!
+## Welcome to <b>kubik</b>!
 
-Kubik is an open-source Kubernetes visualization dashboard designed to give you an intuitive and efficient way to visualize the health and structure of your local Kubernetes clusters.
+kubik is an open-source Kubernetes visualization dashboard designed to give you an intuitive and efficient way to visualize the health and structure of your local Kubernetes clusters. kubik transforms the complex Kubernetes environment into an easy-to-navigate and understand interface, reducing the learning curve for new users. It displays the information you need at a glance, allowing you to focus on key metrics and potential issues.
 
 ## Features
 
 ### Google OAuth 2.0
 
-Secure your Kubernetes cluster health monitoring with the power of Google Authentication and log in seamlessly using your Google credentials. This standardized approach to user access provides a robust layer of security for your project and cluster data.
+![Google OAuth 2.0](./src/assets/login.png)
 
----DO WE NEED GIF HERE---???
+Secure your Kubernetes cluster health monitoring with the power of Google Authentication and log in seamlessly using your Google credentials. This standardized approach to user access provides a robust layer of security for your project and cluster data.
 
 ### Adding Clusters
 
+<img src="./src/assets/home.gif" alt="Cluster Visualization" width="100%"/>
+
 Expand your monitoring capabilities by connecting and adding Kubernetes clusters to your centralized health tracking system. Streamline the process of integrating clusters, allowing you to keep an eye on multiple environments from a single platform.
 
----GIF GOES HERE---SHOW HOW TO ADD AND DELETE
+### Metrics Dashboard
+
+<img src="./src/assets/dashboard.gif" alt="Cluster Visualization" width="100%"/>
+
+Experience comprehensive insights into the health and performance of your Kubernetes cluster through a responsive dashboard. Monitor key metrics such as CPU utilization, RAM usage, disk space, memory, and network performance in real-time.
 
 ### Cluster Visualization
 
+<img src="./src/assets/cluster.gif" alt="Cluster Visualization" width="100%"/>
+
 Gain a deeper understanding of your Kubernetes ecosystem with an interactive cluster graph representation. Explore the intricate relationships and complex interdependencies among nodes, pods, services, and deployments in a visually engaging manner.
-
----GIF GOES HERE---SHOW THE GRAPHS PAGE
-
-### 2D Cluster View
-
----GIF GOES HERE---CHANGE GRAPH TYPES
 
 ## Setup
 
-1. Set up minikube, a local Kubernetes to get started with testing Kubik by following the minikube [documentation](https://minikube.sigs.k8s.io/docs/start/).
+1. Set up minikube, a local Kubernetes to get started with testing kubik by following the minikube [documentation](https://minikube.sigs.k8s.io/docs/start/).
 
 2. Install and configure Docker by following the Docker [documentation](https://www.docker.com/get-started/).
 
@@ -93,7 +95,7 @@ kubectl apply -f webapp-service.yaml
 
 7. Update the "webapp-service.yaml" file to include Prommetheus annotations. This allows your application to be discovered and scraped for metrics.
 
-webapp-service.yaml
+webapp-service.yaml:
 
 ```yaml
 apiVersion: apps/v1
@@ -144,29 +146,27 @@ kubectl port-forward svc/prometheus-server 9090:80 -n default
 
 13. Configure your grafana.ini by following the Grafana [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/).
 
-13a. Under the [security] section, change "allow_embedding" from "false" to "true". Restart Grafana.
+14. Under the [security] section, change "allow_embedding" from "false" to "true". Restart Grafana.
 
-14. Clone the repo.
+15. Clone the repo.
 
-15. Set up the .env file by using the .template.env file.
+16. Set up the .env file by using the .template.env file.
 
-16. Install the dependencies by running the following command:
+17. Install the dependencies by running the following command:
 
 ```bash
 npm install
 ```
 
-17. Run the application by running the following commands:
+18. Run the application by running the following commands:
 
 ```bash
 npm run start
 ```
 
-18. Visit `http://localhost:[PORT]` in your browser.
+19. Visit `http://localhost:[PORT]` in your browser.
 
-EXTRA. INCLUDE GOOGLE OAUTH MAYBE INSTRUCTIONS LINK?????????????
-
-## Contributing
+## Contribution
 
 Any contributions are always welcomed and appreciated!
 
@@ -178,6 +178,6 @@ Any contributions are always welcomed and appreciated!
 ## Our Team
 
 - Branden Chi [GitHub](https://github.com/brandenchi) | [LinkedIn]()
-- Felipe Varela [GitHub](https://github.com/var-ela) | [LinkedIn]()
-- Sung Ku Kang [GitHub](https://github.com/sung-kang) | [LinkedIn]()
-- Yvonne Tram [GitHub](https://github.com/yqtram) | [LinkedIn]()
+- Felipe Varela [GitHub](https://github.com/var-ela) | [LinkedIn](https://github.com/var-ela)
+- Sung Ku Kang [GitHub](https://github.com/sung-kang) | [LinkedIn](https://github.com/sung-kang)
+- Yvonne Tram [GitHub](https://github.com/yqtram) | [LinkedIn](https://github.com/yqtram)
