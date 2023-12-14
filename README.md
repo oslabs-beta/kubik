@@ -1,3 +1,25 @@
+<div align="center">
+
+![Logo](src/assets/kubik-banner.png)
+
+[![JavaScript](https://img.shields.io/badge/javascript-yellow?style=for-the-badge&logo=javascript&logoColor=white)](https://www.javascript.com/)
+![React](https://img.shields.io/badge/-react-61DAFB?style=for-the-badge&logo=react&logoColor=white)
+![Node](https://img.shields.io/badge/-node-339933?style=for-the-badge&logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/-Express-000000?style=for-the-badge&logo=express&logoColor=white)
+![OAUTH](https://img.shields.io/badge/OAUTH2.0-grey?style=for-the-badge&logo=JSON%20web%20tokens)
+![passport](https://img.shields.io/badge/PASSPORT-black?style=for-the-badge&logo=passport)
+![Bcrypt](https://img.shields.io/badge/BCRYPT-grey?style=for-the-badge&logo=letsencrypt)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)
+[![Docker](https://img.shields.io/badge/docker-%232496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/kubernetes-%23326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Prometheus](https://img.shields.io/badge/prometheus-%23E6522C?style=for-the-badge&logo=prometheus&logoColor=white)](https://prometheus.io/)
+[![Grafana](https://img.shields.io/badge/grafana-%23F46800?style=for-the-badge&logo=grafana&logoColor=white)](https://grafana.com/)
+[![Helm](https://img.shields.io/badge/helm-090E6F?style=for-the-badge&logo=helm&logoColor=white)](https://helm.sh/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![MaterialUI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+
 # kubik
 
 ## Welcome to <b>kubik</b>!
@@ -30,7 +52,7 @@ Experience comprehensive insights into the health and performance of your Kubern
 
 Gain a deeper understanding of your Kubernetes ecosystem with an interactive cluster graph representation. Explore the intricate relationships and complex interdependencies among nodes, pods, services, and deployments in a visually engaging manner.
 
-## Setup
+## Cluster Setup
 
 1. Set up minikube, a local Kubernetes to get started with testing kubik by following the minikube [documentation](https://minikube.sigs.k8s.io/docs/start/).
 
@@ -130,41 +152,45 @@ kubectl apply -f webapp-deployment.yaml
 
 9. Install helm by following the Helm [documentation](https://helm.sh/docs/intro/install/).
 
-10. Deploy the Prometheus monitoring and alerting toolkit by running the following terminal command:
+## Prometheus/Grafana Setup
+
+1. Deploy the Prometheus monitoring and alerting toolkit by running the following terminal command:
 
 ```bash
 helm install prometheus prometheus-community/prometheus
 ```
 
-11. Forward the Prometheus service from the 'default' namespace within your Kubernetes cluster to port 9090 on your local machine by executing the following terminal command:
+2. Forward the Prometheus service from the 'default' namespace within your Kubernetes cluster to port 9090 on your local machine by executing the following terminal command:
 
 ```bash
 kubectl port-forward svc/prometheus-server 9090:80 -n default
 ```
 
-12. Install and log into Grafana by following the Grafana [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/).
+3. Install and log into Grafana by following the Grafana [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/installation/).
 
-13. Configure your grafana.ini by following the Grafana [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/).
+4. Configure your grafana.ini by following the Grafana [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/).
 
-14. Under the [security] section, change "allow_embedding" from "false" to "true". Restart Grafana.
+5. Under the [security] section, change "allow_embedding" from "false" to "true". Restart Grafana.
 
-15. Clone the repo.
+## App Launch
 
-16. Set up the .env file by using the .template.env file.
+1. Clone the repo.
 
-17. Install the dependencies by running the following command:
+2. Set up the .env file by using the .template.env file.
+
+3. Install the dependencies by running the following command:
 
 ```bash
 npm install
 ```
 
-18. Run the application by running the following commands:
+4. Run the application by running the following commands:
 
 ```bash
 npm run start
 ```
 
-19. Visit `http://localhost:[PORT]` in your browser.
+5. Visit `http://localhost:[PORT]` in your browser.
 
 ## Contribution
 
