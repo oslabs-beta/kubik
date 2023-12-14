@@ -75,7 +75,7 @@ const Dashboard = () => {
         alignItems: 'center',
         height: '100vh',
         width: '100vw',
-        backgroundColor: '#1b2123',
+        // backgroundColor: '#1b2123',
         paddingTop: '40px',
       }}
     >
