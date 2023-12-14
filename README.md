@@ -206,7 +206,7 @@ Any contributions are always welcomed and appreciated!
 
 ## Our Team
 
-- Branden Chi [GitHub](https://github.com/brandenchi) | [LinkedIn](https://github.com/brandenchi)
+- Branden Chi [GitHub](https://github.com/brandenchi) | [LinkedIn](www.linkedin.com/in/branden-chi)
 - Felipe Varela [GitHub](https://github.com/var-ela) | [LinkedIn](https://www.linkedin.com/in/phil-varela-co/)
 - Sung Ku Kang [GitHub](https://github.com/sung-kang) | [LinkedIn](https://www.linkedin.com/in/sung-kang/)
 - Yvonne Tram [GitHub](https://github.com/yqtram) | [LinkedIn](https://www.linkedin.com/in/yqtram/)
