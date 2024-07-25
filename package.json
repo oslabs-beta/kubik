@@ -14,6 +14,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.616.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@esbuild/darwin-arm64": "^0.19.7",

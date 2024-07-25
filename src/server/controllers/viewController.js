@@ -16,6 +16,8 @@ const viewController = {
       const services = await k8sApi.listServiceForAllNamespaces();
       const deployments = await appsV1Api.listDeploymentForAllNamespaces();
 
+      console.log(nodes);
+
       // Map corresponding namespaces and nodes
       const nsPodRelation = namespaces.body.items.reduce(
         (accumulator, namespace) => {
